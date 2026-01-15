@@ -261,16 +261,209 @@ export default function HighSchoolGPACalculator() {
                 </div>
 
                 <details className="explanation-section">
-                    <summary>Why High School GPA Matters</summary>
+                    <summary>How High School GPA is Calculated</summary>
                     <div className="explanation-section__content">
-                        <p>Your cumulative high school GPA is a key factor in college admissions:</p>
-                        <ul style={{ marginLeft: "var(--space-4)", marginTop: "var(--space-2)" }}>
-                            <li><strong>3.7+:</strong> Competitive for selective universities</li>
-                            <li><strong>3.5+:</strong> Competitive for most state universities</li>
-                            <li><strong>3.0+:</strong> Meets minimum requirements for many colleges</li>
-                        </ul>
+                        <p>Your cumulative GPA is the weighted average of all years:</p>
+                        <p style={{ fontFamily: "monospace", background: "var(--color-bg-secondary)", padding: "var(--space-2)", borderRadius: "var(--radius-sm)", marginTop: "var(--space-2)" }}>
+                            Cumulative GPA = Σ(Year GPA × Credits) ÷ Total Credits
+                        </p>
                     </div>
                 </details>
+
+                {/* Deep SEO Content */}
+                <section className="seo-content">
+                    <h2>How to Calculate Your High School GPA</h2>
+                    <p>
+                        Your high school GPA (Grade Point Average) is one of the most important numbers in your academic life.
+                        It&apos;s the first thing colleges look at, and it determines scholarship eligibility, honor roll status,
+                        and class rank. Understanding how it&apos;s calculated helps you make strategic decisions about your courses.
+                    </p>
+
+                    <h3>Worked Example: 4-Year Cumulative GPA</h3>
+                    <p>Let&apos;s calculate a real example of a student improving their GPA over four years:</p>
+                    <div className="seo-content__table-wrapper">
+                        <table className="seo-content__table">
+                            <thead>
+                                <tr>
+                                    <th>Year</th>
+                                    <th>GPA</th>
+                                    <th>Credits</th>
+                                    <th>Quality Points</th>
+                                    <th>Cumulative GPA</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Freshman</td>
+                                    <td>3.2</td>
+                                    <td>6</td>
+                                    <td>19.2</td>
+                                    <td>3.20</td>
+                                </tr>
+                                <tr>
+                                    <td>Sophomore</td>
+                                    <td>3.4</td>
+                                    <td>7</td>
+                                    <td>23.8</td>
+                                    <td>3.31</td>
+                                </tr>
+                                <tr>
+                                    <td>Junior</td>
+                                    <td>3.6</td>
+                                    <td>7</td>
+                                    <td>25.2</td>
+                                    <td>3.41</td>
+                                </tr>
+                                <tr>
+                                    <td>Senior</td>
+                                    <td>3.8</td>
+                                    <td>6</td>
+                                    <td>22.8</td>
+                                    <td>3.50</td>
+                                </tr>
+                                <tr className="seo-content__table-total">
+                                    <td><strong>Total</strong></td>
+                                    <td>—</td>
+                                    <td><strong>26</strong></td>
+                                    <td><strong>91.0</strong></td>
+                                    <td><strong>3.50</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p>
+                        Notice how this student started with a 3.2 freshman year and ended with a <strong>3.50 cumulative GPA</strong>
+                        by improving each year. Colleges love to see upward trends like this.
+                    </p>
+
+                    <h3>What GPA Do You Need for College?</h3>
+                    <p>Here are typical GPA requirements for different types of colleges:</p>
+                    <div className="seo-content__table-wrapper">
+                        <table className="seo-content__table">
+                            <thead>
+                                <tr>
+                                    <th>School Type</th>
+                                    <th>Typical GPA Range</th>
+                                    <th>Examples</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Ivy League</td>
+                                    <td>3.9 – 4.0</td>
+                                    <td>Harvard, Yale, Princeton</td>
+                                </tr>
+                                <tr>
+                                    <td>Top 20 Universities</td>
+                                    <td>3.7 – 3.9</td>
+                                    <td>Duke, Northwestern, UCLA</td>
+                                </tr>
+                                <tr>
+                                    <td>Competitive State Schools</td>
+                                    <td>3.5 – 3.7</td>
+                                    <td>UT Austin, UMich, UVA</td>
+                                </tr>
+                                <tr>
+                                    <td>Most State Universities</td>
+                                    <td>3.0 – 3.5</td>
+                                    <td>State flagships</td>
+                                </tr>
+                                <tr>
+                                    <td>Community Colleges</td>
+                                    <td>2.0+</td>
+                                    <td>Open admission</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h3>Can I Still Get Into a Good College If Freshman Year Was Bad?</h3>
+                    <p>
+                        <strong>Yes.</strong> Admissions officers understand that students mature. They look for:
+                    </p>
+                    <div className="seo-content__scenarios">
+                        <div className="seo-content__scenario">
+                            <h4>📈 Upward Trend</h4>
+                            <p>
+                                A student who goes 2.8 → 3.2 → 3.6 → 3.8 is more impressive than someone
+                                with a flat 3.3 every year. Show growth.
+                            </p>
+                        </div>
+                        <div className="seo-content__scenario">
+                            <h4>📚 Junior Year Matters Most</h4>
+                            <p>
+                                Junior year GPA is weighted heavily because it&apos;s the most recent full year
+                                when you apply. Make it count.
+                            </p>
+                        </div>
+                        <div className="seo-content__scenario">
+                            <h4>🎯 Course Rigor</h4>
+                            <p>
+                                A 3.5 in AP/Honors courses is often more valuable than a 3.9 in regular classes.
+                                Colleges see your course difficulty.
+                            </p>
+                        </div>
+                        <div className="seo-content__scenario">
+                            <h4>✍️ Explain in Essays</h4>
+                            <p>
+                                If you had a rough year due to circumstances (health, family), you can explain
+                                this in your application.
+                            </p>
+                        </div>
+                    </div>
+
+                    <h3>Weighted vs Unweighted GPA</h3>
+                    <p>
+                        <strong>Unweighted GPA</strong> uses the standard 4.0 scale. <strong>Weighted GPA</strong>
+                        gives bonus points for harder courses:
+                    </p>
+                    <ul style={{ marginLeft: "var(--space-6)", marginBottom: "var(--space-4)" }}>
+                        <li><strong>Honors:</strong> +0.5 points (A = 4.5)</li>
+                        <li><strong>AP/IB:</strong> +1.0 points (A = 5.0)</li>
+                    </ul>
+                    <p>
+                        Most colleges recalculate your GPA using their own system, so don&apos;t stress too much
+                        about your school&apos;s specific weighting.
+                    </p>
+
+                    <h3>How to Raise Your GPA Before Senior Year</h3>
+                    <ul style={{ marginLeft: "var(--space-6)", marginBottom: "var(--space-4)" }}>
+                        <li><strong>Retake failed courses:</strong> Some schools allow grade replacement</li>
+                        <li><strong>Take summer classes:</strong> Boost credits with strong grades</li>
+                        <li><strong>Focus on junior year:</strong> This is the most impactful year</li>
+                        <li><strong>Get help early:</strong> Tutoring, office hours, study groups</li>
+                    </ul>
+
+                    <h3>Next Steps</h3>
+                    <p>
+                        Use our <a href="/gpa">GPA Workspace</a> to plan exactly what grades you need
+                        in each course to hit your target. The <strong>Aim Mode</strong> feature shows
+                        you the specific grades required to reach any GPA goal.
+                    </p>
+                    <p>
+                        For weighted GPA calculations with AP/Honors bonuses, try our
+                        <a href="/gpa-calculators/weighted-gpa-calculator"> Weighted GPA Calculator</a>.
+                    </p>
+                </section>
+
+                {/* Related Tools */}
+                <section style={{ marginTop: "var(--space-8)" }}>
+                    <h3 style={{ marginBottom: "var(--space-4)" }}>Related Tools</h3>
+                    <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "var(--space-4)" }}>
+                        <a href="/gpa" className="card card--hover" style={{ padding: "var(--space-4)", textDecoration: "none" }}>
+                            <strong style={{ color: "var(--color-text)" }}>GPA Workspace</strong>
+                            <p style={{ fontSize: "var(--text-sm)", color: "var(--color-text-muted)", marginTop: "var(--space-1)" }}>
+                                Plan your target GPA with Aim Mode
+                            </p>
+                        </a>
+                        <a href="/gpa-calculators/weighted-gpa-calculator" className="card card--hover" style={{ padding: "var(--space-4)", textDecoration: "none" }}>
+                            <strong style={{ color: "var(--color-text)" }}>Weighted GPA Calculator</strong>
+                            <p style={{ fontSize: "var(--text-sm)", color: "var(--color-text-muted)", marginTop: "var(--space-1)" }}>
+                                Include AP/Honors bonus points
+                            </p>
+                        </a>
+                    </div>
+                </section>
             </div>
         </div>
     );

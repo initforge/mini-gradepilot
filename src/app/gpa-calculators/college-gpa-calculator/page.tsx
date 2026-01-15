@@ -284,6 +284,191 @@ export default function CollegeGPACalculator() {
                         </p>
                     </div>
                 </details>
+
+                {/* Deep SEO Content */}
+                <section className="seo-content">
+                    <h2>How to Calculate Your College GPA</h2>
+                    <p>
+                        Your cumulative college GPA is the weighted average of all your semester GPAs.
+                        Unlike high school, college courses have varying credit hours, and your GPA
+                        directly impacts grad school admissions, scholarships, and job opportunities.
+                    </p>
+
+                    <h3>Worked Example: 4-Semester Cumulative GPA</h3>
+                    <p>Here&apos;s how cumulative GPA builds over multiple semesters:</p>
+                    <div className="seo-content__table-wrapper">
+                        <table className="seo-content__table">
+                            <thead>
+                                <tr>
+                                    <th>Semester</th>
+                                    <th>GPA</th>
+                                    <th>Credits</th>
+                                    <th>Quality Points</th>
+                                    <th>Cumulative</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Fall 2023</td>
+                                    <td>3.2</td>
+                                    <td>15</td>
+                                    <td>48.0</td>
+                                    <td>3.20</td>
+                                </tr>
+                                <tr>
+                                    <td>Spring 2024</td>
+                                    <td>3.5</td>
+                                    <td>16</td>
+                                    <td>56.0</td>
+                                    <td>3.35</td>
+                                </tr>
+                                <tr>
+                                    <td>Fall 2024</td>
+                                    <td>3.7</td>
+                                    <td>15</td>
+                                    <td>55.5</td>
+                                    <td>3.47</td>
+                                </tr>
+                                <tr>
+                                    <td>Spring 2025</td>
+                                    <td>3.8</td>
+                                    <td>14</td>
+                                    <td>53.2</td>
+                                    <td>3.55</td>
+                                </tr>
+                                <tr className="seo-content__table-total">
+                                    <td><strong>Total</strong></td>
+                                    <td>—</td>
+                                    <td><strong>60</strong></td>
+                                    <td><strong>212.7</strong></td>
+                                    <td><strong>3.55</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p>
+                        This student improved from 3.2 to <strong>3.55 cumulative</strong> over two years.
+                        Notice how later semesters have less impact on the cumulative — the more credits you have,
+                        the harder it is to move your GPA significantly.
+                    </p>
+
+                    <h3>What GPA Do You Need for Graduate School?</h3>
+                    <div className="seo-content__table-wrapper">
+                        <table className="seo-content__table">
+                            <thead>
+                                <tr>
+                                    <th>Program Type</th>
+                                    <th>Competitive GPA</th>
+                                    <th>Minimum GPA</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Medical School (MD)</td>
+                                    <td>3.7+</td>
+                                    <td>3.0 (varies)</td>
+                                </tr>
+                                <tr>
+                                    <td>Law School (Top 14)</td>
+                                    <td>3.8+</td>
+                                    <td>3.5</td>
+                                </tr>
+                                <tr>
+                                    <td>MBA (Top 20)</td>
+                                    <td>3.5+</td>
+                                    <td>3.0</td>
+                                </tr>
+                                <tr>
+                                    <td>PhD Programs</td>
+                                    <td>3.5+</td>
+                                    <td>3.0</td>
+                                </tr>
+                                <tr>
+                                    <td>Master&apos;s Programs</td>
+                                    <td>3.3+</td>
+                                    <td>2.75-3.0</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h3>GPA Benchmarks by Goal</h3>
+                    <div className="seo-content__scenarios">
+                        <div className="seo-content__scenario">
+                            <h4>🎓 Dean&apos;s List</h4>
+                            <p>
+                                Typically requires 3.5+ GPA per semester.
+                                Looks great on resume and grad school applications.
+                            </p>
+                        </div>
+                        <div className="seo-content__scenario">
+                            <h4>🏆 Magna Cum Laude</h4>
+                            <p>
+                                Usually 3.7-3.8+ cumulative GPA at graduation.
+                                Requirements vary by school.
+                            </p>
+                        </div>
+                        <div className="seo-content__scenario">
+                            <h4>💼 Internship Threshold</h4>
+                            <p>
+                                Many companies require 3.0+ to apply.
+                                Investment banking and consulting often want 3.5+.
+                            </p>
+                        </div>
+                        <div className="seo-content__scenario">
+                            <h4>📚 Academic Probation</h4>
+                            <p>
+                                Usually triggered below 2.0. If you&apos;re close,
+                                focus on raising grades before it affects enrollment.
+                            </p>
+                        </div>
+                    </div>
+
+                    <h3>How to Raise Your College GPA</h3>
+                    <ul style={{ marginLeft: "var(--space-6)", marginBottom: "var(--space-4)" }}>
+                        <li><strong>Retake low grades:</strong> Many schools replace the old grade in GPA calculation</li>
+                        <li><strong>Take easier GPA boosters:</strong> Some electives are known for high grades</li>
+                        <li><strong>Drop before deadline:</strong> W is better than D or F</li>
+                        <li><strong>Front-load effort:</strong> Early credits count as much as later ones</li>
+                        <li><strong>Use office hours:</strong> Professors often give partial credit for effort</li>
+                    </ul>
+
+                    <h3>The Credit Hour Problem</h3>
+                    <p>
+                        The more credits you accumulate, the harder it is to change your cumulative GPA.
+                        A student with 90 credits at 3.0 would need a <strong>4.0 for 30 credits</strong>
+                        just to reach 3.25. Start strong if you can.
+                    </p>
+
+                    <h3>Next Steps</h3>
+                    <p>
+                        Use our <a href="/transcript">Transcript Workspace</a> to track your GPA
+                        across your entire academic career with visual trend analysis.
+                    </p>
+                    <p>
+                        Need to figure out what grade you need on your final?
+                        Try the <a href="/grade-calculators/required-final-grade-calculator">Required Final Grade Calculator</a>.
+                    </p>
+                </section>
+
+                {/* Related Tools */}
+                <section style={{ marginTop: "var(--space-8)" }}>
+                    <h3 style={{ marginBottom: "var(--space-4)" }}>Related Tools</h3>
+                    <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "var(--space-4)" }}>
+                        <a href="/transcript" className="card card--hover" style={{ padding: "var(--space-4)", textDecoration: "none" }}>
+                            <strong style={{ color: "var(--color-text)" }}>Transcript Workspace</strong>
+                            <p style={{ fontSize: "var(--text-sm)", color: "var(--color-text-muted)", marginTop: "var(--space-1)" }}>
+                                Full academic history tracking
+                            </p>
+                        </a>
+                        <a href="/gpa" className="card card--hover" style={{ padding: "var(--space-4)", textDecoration: "none" }}>
+                            <strong style={{ color: "var(--color-text)" }}>GPA Workspace</strong>
+                            <p style={{ fontSize: "var(--text-sm)", color: "var(--color-text-muted)", marginTop: "var(--space-1)" }}>
+                                Plan target GPA with Aim Mode
+                            </p>
+                        </a>
+                    </div>
+                </section>
             </div>
         </div>
     );
