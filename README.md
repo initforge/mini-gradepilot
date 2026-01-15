@@ -50,7 +50,6 @@ Open [http://localhost:3000](http://localhost:3000) to view the app.
 | High School GPA Calculator | `/gpa-calculators/high-school-gpa-calculator` |
 | Final Grade Calculator | `/grade-calculators/final-grade-calculator` |
 | Required Final Grade Calculator | `/grade-calculators/required-final-grade-calculator` |
-| Percentage to GPA | `/converters/percentage-to-gpa` |
 
 ---
 
@@ -65,12 +64,12 @@ docker compose up -d --build
 docker logs gradepilot -f
 ```
 
-### Nginx Configuration
-Located at `/etc/nginx/sites-available/gradepilot` on VPS.
-- HTTP/2 enabled
-- gzip compression
-- SSL via Let's Encrypt
-- Static asset caching (7 days)
+### VPS Update
+```bash
+cd ~/gradepilot
+git pull
+docker compose up -d --build
+```
 
 ### SSL Renewal
 ```bash
@@ -79,18 +78,7 @@ certbot renew --dry-run
 
 ---
 
-## 🔍 SEO Files
-
-| File | Purpose |
-|------|---------|
-| `src/app/sitemap.ts` | Dynamic sitemap generation |
-| `src/app/robots.ts` | Crawler instructions |
-| `public/sitemap.xml` | Static sitemap backup |
-| `SEO_CHECKLIST.md` | Deployment & traffic checklist |
-
----
-
-## 📁 Project Structure
+##  Project Structure
 
 ```
 src/
@@ -99,21 +87,41 @@ src/
 │   ├── gpa/               # GPA Workspace
 │   ├── course/            # Course Analyzer
 │   ├── transcript/        # Transcript
-│   ├── gpa-calculators/   # Standalone GPA tools
-│   └── grade-calculators/ # Standalone grade tools
+│   ├── gpa-calculators/   # 4 standalone GPA calculators
+│   ├── grade-calculators/ # 2 standalone grade calculators
+│   ├── about/
+│   ├── contact/
+│   ├── privacy/
+│   ├── terms/
+│   ├── sitemap.ts         # Dynamic sitemap
+│   └── robots.ts          # Crawler rules
 ├── components/
 │   ├── Icons.tsx          # Branded SVG icons
-│   ├── SEOContent.tsx     # FAQ, ExplanationBlock
-│   └── WorkspaceNav.tsx   # Cross-workspace navigation
+│   └── RelatedTools.tsx   # Cross-linking component
 └── lib/
-    └── useAcademicStore.ts # Zustand state management
+    └── useAcademicStore.ts
+
+public/
+└── sitemap.xml            # Static sitemap backup
 
 nginx/
-└── nginx.conf             # Production nginx config
+└── nginx.conf             # Production config
 
-docker-compose.yml         # Container orchestration
-Dockerfile                 # Multi-stage build
+TRAFFIC_PLAN.md            # Traffic acquisition strategy
+SEO_CHECKLIST.md           # SEO & deployment status
 ```
+
+---
+
+## 📊 Page Count
+
+| Type | Count |
+|------|-------|
+| Workspaces | 3 |
+| GPA Calculators | 4 |
+| Grade Calculators | 2 |
+| Info Pages | 4 |
+| **Total** | **13 pages** |
 
 ---
 

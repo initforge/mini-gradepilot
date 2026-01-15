@@ -1,91 +1,99 @@
-# GradePilot Traffic Acquisition Plan
+# GradePilot - Traffic Acquisition Plan
 
 ## Mục tiêu
-Đạt 100+ visitors/ngày trong 30 ngày đầu → Apply AdSense → Passive income.
+- 100+ visitors/ngày trong 30 ngày → Apply AdSense
+- Long-term: Passive income từ ads
 
 ---
 
-## Chiến lược chính
+## 📍 Phase 1: Reddit (Tuần 1-4)
 
-### 1. Reddit (Ưu tiên cao nhất)
+### Target Subreddits
+| Subreddit | Members | Focus |
+|-----------|---------|-------|
+| r/college | 1.7M | General GPA questions |
+| r/ApplyingToCollege | 800K | High school GPA |
+| r/premed | 400K | Med school GPA requirements |
+| r/GradSchool | 300K | Grad school GPA |
+| r/GetStudying | 600K | Study tips + GPA |
 
-**Subreddits target:**
-- r/college (1.7M members)
-- r/ApplyingToCollege (800K)
-- r/premed (400K)
-- r/GradSchool (300K)
-- r/GetStudying (600K)
-
-**Lịch trình:**
+### Timeline
 | Tuần | Hành động | Link? |
 |------|-----------|-------|
 | 1-2 | Comment helpful, có số liệu | ❌ KHÔNG |
-| 3-4 | Bắt đầu link | 1 link/ngày max |
-| 5+ | Maintain | 1-2 link/ngày |
+| 3-4 | Bắt đầu link 1 lần/ngày | ✅ Có |
 
-**Template comment (không link):**
+### Template (Không link - Tuần 1-2)
 ```
 Your GPA is calculated as: (Total Grade Points) / (Total Credits)
 
-For your case: if you have 45 credits at 2.8 and take 15 this semester,
-you'd need roughly 3.6 average to hit 3.0 cumulative.
+For your case with 45 credits at 2.8, you'd need roughly 
+3.6 this semester (15 credits) to hit 3.0 cumulative.
 
 Formula: (45×2.8 + 15×3.6) / 60 = 3.0
 ```
 
-**Template comment (có link - tuần 3+):**
+### Template (Có link - Tuần 3+)
 ```
-[Same calculation as above]
+[Same helpful answer as above]
 
 I use gradepilot.org for this - has an Aim Mode that shows 
-exactly what grades you need per course.
+exactly what grades you need per course to hit your target.
 ```
 
-**Rủi ro:**
-- Bị xóa comment → Chỉ link 1-2 lần/ngày
-- Shadowban → Tham gia discussion 70% time không link
-- Downvote → Cung cấp value trước, không spam
+### ⚠️ Tránh bị ban
+- Tuần 1-2: 100% không link
+- Tuần 3+: Max 1 link/ngày
+- 70% comments không có link
+- Tham gia discussions bình thường
 
 ---
 
-### 2. Quora
+## 📍 Phase 2: Quora (Song song với Reddit)
 
-**Topics:**
+### Daily: 1-2 answers, 300+ words mỗi answer
+
+### Topics
 - GPA and Grades
 - College Admissions
 - Academic Performance
+- Study Tips
 
-**Tần suất:** 1-2 answers/ngày, 300+ words mỗi answer
-
-**Template:**
+### Template
 ```
 How to Calculate Your GPA
 
-GPA = (Sum of Grade Points × Credit Hours) / Total Credit Hours
+GPA = (Sum of Grade Points × Credits) / Total Credits
 
-[Detailed explanation with example]
+Example:
+- Calculus (4 credits, A=4.0): 16 points
+- English (3 credits, B=3.0): 9 points
+- History (3 credits, A=4.0): 12 points
 
-For quick calculations, you can use gradepilot.org - it has 
-calculators for weighted GPA, final grades, and required scores.
+Total: 37 points / 10 credits = 3.7 GPA
+
+[More explanation]
+
+For quick calculations: gradepilot.org
 ```
 
 ---
 
-### 3. Facebook Groups
+## 📍 Phase 3: Facebook Groups (Tuần 3-4)
 
-**Groups target:**
+### Target Groups
 - "College Students" (US-based)
 - "Pre-Med Students"
 - "High School Seniors 2025/2026"
 
-**Cách làm:**
-1. Join groups → engage 1 tuần (không link)
-2. Post 1 lần/group dạng "xin feedback"
-3. Không spam lại
+### Cách làm
+1. Join → engage 1 tuần (comment, like)
+2. Post 1 lần dạng "xin feedback về tool tao làm"
+3. Không spam lại cùng group
 
 ---
 
-## Lịch hàng ngày (30 phút)
+## ⏰ Lịch hàng ngày (30 phút)
 
 | Thời gian | Việc |
 |-----------|------|
@@ -94,45 +102,34 @@ calculators for weighted GPA, final grades, and required scores.
 
 ---
 
-## KPIs theo dõi
+## 📊 KPIs
 
-| Metric | Tool | Target tháng 1 |
-|--------|------|----------------|
-| Impressions | Google Search Console | 500+ |
-| Clicks | Google Search Console | 30+ |
-| Reddit referrals | Analytics | 50+ |
-| Total visitors | Analytics | 100+/ngày |
+| Metric | Tool | Target tuần 2 | Target tháng 1 |
+|--------|------|---------------|----------------|
+| Impressions | GSC | 200+ | 1000+ |
+| Clicks | GSC | 20+ | 100+ |
+| Reddit referrals | Analytics | 30+ | 150+ |
+| Daily visitors | Analytics | 50+ | 100+ |
 
 ---
 
-## Monetization timeline
+## 💰 Monetization
 
-| Traffic/ngày | Hành động |
-|--------------|-----------|
-| < 100 | Không làm gì về ads |
+| Traffic/ngày | Action |
+|--------------|--------|
+| < 100 | Focus traffic only |
 | 100-500 | Apply AdSense |
 | 500+ | Optimize ad placement |
 
 ---
 
-## Checklist SEO (đã hoàn thành)
-
-- [x] Tất cả calculator pages có 800+ words
-- [x] Worked examples trên mỗi page
-- [x] Benchmark tables (college GPA requirements)
-- [x] Internal links giữa các tools
-- [x] Sitemap đã submitted
-- [x] Google Search Console đã verify
-
----
-
-## Nếu không hiệu quả
+## ❌ Nếu không hiệu quả
 
 | Sau | Vấn đề | Giải pháp |
 |-----|--------|-----------|
-| 2 tuần | Reddit không traffic | Thử sub khác, review cách comment |
-| 1 tháng | Google không rank | Thêm blog posts, guest posts |
-| 3 tháng | Không thu nhập | Pivot hoặc bán site |
+| 2 tuần | Reddit không traffic | Thử sub khác |
+| 1 tháng | Google không rank | Thêm blog posts |
+| 3 tháng | Không thu nhập | Pivot hoặc bán |
 
 ---
 
