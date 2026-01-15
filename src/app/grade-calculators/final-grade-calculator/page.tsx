@@ -259,6 +259,140 @@ export default function FinalGradeCalculator() {
                     </div>
                 </details>
 
+                {/* Deep SEO Content */}
+                <section className="seo-content">
+                    <h2>How to Calculate Your Final Course Grade</h2>
+                    <p>
+                        Most courses use a weighted grading system where different assignments count for different percentages of your final grade.
+                        Understanding how this works is crucial for strategic studying — you should focus your effort where it matters most.
+                    </p>
+                    <p>
+                        Our Final Grade Calculator takes all your assignment categories (homework, quizzes, exams, projects, etc.)
+                        and calculates your current weighted average. It also shows you which categories have the most impact on your grade.
+                    </p>
+
+                    <h3>Worked Example: Calculating a Weighted Average</h3>
+                    <p>Let&apos;s calculate the final grade for a typical college course:</p>
+                    <div className="seo-content__table-wrapper">
+                        <table className="seo-content__table">
+                            <thead>
+                                <tr>
+                                    <th>Category</th>
+                                    <th>Weight</th>
+                                    <th>Your Score</th>
+                                    <th>Contribution</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Homework</td>
+                                    <td>15%</td>
+                                    <td>92%</td>
+                                    <td>13.8</td>
+                                </tr>
+                                <tr>
+                                    <td>Quizzes</td>
+                                    <td>15%</td>
+                                    <td>85%</td>
+                                    <td>12.75</td>
+                                </tr>
+                                <tr>
+                                    <td>Midterm</td>
+                                    <td>25%</td>
+                                    <td>78%</td>
+                                    <td>19.5</td>
+                                </tr>
+                                <tr>
+                                    <td>Final Exam</td>
+                                    <td>30%</td>
+                                    <td>82%</td>
+                                    <td>24.6</td>
+                                </tr>
+                                <tr>
+                                    <td>Participation</td>
+                                    <td>15%</td>
+                                    <td>95%</td>
+                                    <td>14.25</td>
+                                </tr>
+                                <tr className="seo-content__table-total">
+                                    <td><strong>Total</strong></td>
+                                    <td><strong>100%</strong></td>
+                                    <td>—</td>
+                                    <td><strong>84.9%</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p>
+                        Your final grade is <strong>84.9%</strong>, which is a <strong>B</strong>.
+                        Notice that the Final Exam (30%) contributes almost twice as much as Homework (15%) to your grade.
+                    </p>
+
+                    <h3>Common Grading Weight Distributions</h3>
+                    <p>Here are typical weight distributions for different types of courses:</p>
+                    <div className="seo-content__scenarios">
+                        <div className="seo-content__scenario">
+                            <h4>📚 Lecture-Based Course</h4>
+                            <p>
+                                Midterm: 25-30%<br />
+                                Final: 30-40%<br />
+                                Homework: 15-20%<br />
+                                Quizzes: 10-15%
+                            </p>
+                        </div>
+                        <div className="seo-content__scenario">
+                            <h4>🔬 Lab-Based Course</h4>
+                            <p>
+                                Lab Reports: 30-40%<br />
+                                Midterm: 20-25%<br />
+                                Final: 25-30%<br />
+                                Participation: 10%
+                            </p>
+                        </div>
+                        <div className="seo-content__scenario">
+                            <h4>📝 Writing-Intensive Course</h4>
+                            <p>
+                                Essays/Papers: 40-50%<br />
+                                Participation: 15-20%<br />
+                                Final Project: 20-30%<br />
+                                Short Assignments: 10%
+                            </p>
+                        </div>
+                        <div className="seo-content__scenario">
+                            <h4>💻 Project-Based Course</h4>
+                            <p>
+                                Final Project: 30-40%<br />
+                                Weekly Assignments: 30%<br />
+                                Midterm: 15-20%<br />
+                                Participation: 10%
+                            </p>
+                        </div>
+                    </div>
+
+                    <h3>Strategic Studying: Where to Focus</h3>
+                    <p>
+                        Not all assignments are created equal. Use these principles to maximize your grade efficiency:
+                    </p>
+                    <ul style={{ marginLeft: "var(--space-6)", marginBottom: "var(--space-4)" }}>
+                        <li><strong>High-weight, low-score:</strong> These are your biggest opportunities. A 10-point improvement on a 30% exam adds 3 points to your final grade.</li>
+                        <li><strong>Easy points:</strong> Participation, homework completion, and attendance are often easy 100s. Don&apos;t throw these away.</li>
+                        <li><strong>Diminishing returns:</strong> Going from 95% to 100% on homework (5% weight) only adds 0.25 points. Focus elsewhere.</li>
+                    </ul>
+
+                    <h3>What If My Weights Don&apos;t Add to 100%?</h3>
+                    <p>
+                        If your syllabus weights don&apos;t add to 100%, check if some categories are &quot;optional&quot; or &quot;replace lowest grade.&quot;
+                        Our calculator will still work — it calculates your weighted average based on whatever weights you enter.
+                    </p>
+
+                    <h3>Next Steps</h3>
+                    <p>
+                        Now that you know your current grade, use our <a href="/grade-calculators/required-final-grade-calculator">Required Final Grade Calculator</a>
+                        to find out exactly what score you need on upcoming exams to reach your target.
+                        Or visit the <a href="/gpa">GPA Workspace</a> to see how this course affects your overall GPA.
+                    </p>
+                </section>
+
                 {/* Related Tools */}
                 <RelatedTools currentPath="/grade-calculators/final-grade-calculator" />
             </div>

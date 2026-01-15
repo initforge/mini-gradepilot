@@ -277,6 +277,188 @@ export default function WeightedGPACalculator() {
                     </div>
                 </details>
 
+                {/* Deep SEO Content */}
+                <section className="seo-content">
+                    <h2>What is Weighted GPA?</h2>
+                    <p>
+                        Weighted GPA is a modified version of the standard 4.0 GPA scale that gives extra credit for more challenging courses.
+                        While a regular (unweighted) GPA maxes out at 4.0, weighted GPA can go higher — typically up to 5.0 —
+                        because advanced courses like AP, IB, and Honors receive bonus points.
+                    </p>
+                    <p>
+                        This system recognizes that earning a B in AP Calculus requires more effort than earning a B in regular math,
+                        and rewards students who challenge themselves academically.
+                    </p>
+
+                    <h3>How Weighted GPA Bonuses Work</h3>
+                    <div className="seo-content__table-wrapper">
+                        <table className="seo-content__table">
+                            <thead>
+                                <tr>
+                                    <th>Course Type</th>
+                                    <th>Bonus Points</th>
+                                    <th>A Grade Value</th>
+                                    <th>B Grade Value</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Regular</td>
+                                    <td>+0.0</td>
+                                    <td>4.0</td>
+                                    <td>3.0</td>
+                                </tr>
+                                <tr>
+                                    <td>Honors / Pre-AP</td>
+                                    <td>+0.5</td>
+                                    <td>4.5</td>
+                                    <td>3.5</td>
+                                </tr>
+                                <tr>
+                                    <td>AP / IB / Dual Enrollment</td>
+                                    <td>+1.0</td>
+                                    <td>5.0</td>
+                                    <td>4.0</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h3>Worked Example: Calculating Weighted GPA</h3>
+                    <p>Let&apos;s calculate both unweighted and weighted GPA for this schedule:</p>
+                    <div className="seo-content__table-wrapper">
+                        <table className="seo-content__table">
+                            <thead>
+                                <tr>
+                                    <th>Course</th>
+                                    <th>Type</th>
+                                    <th>Credits</th>
+                                    <th>Grade</th>
+                                    <th>Unweighted</th>
+                                    <th>Weighted</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>AP English</td>
+                                    <td>AP</td>
+                                    <td>4</td>
+                                    <td>B (3.0)</td>
+                                    <td>12.0</td>
+                                    <td>16.0</td>
+                                </tr>
+                                <tr>
+                                    <td>Honors Chemistry</td>
+                                    <td>Honors</td>
+                                    <td>4</td>
+                                    <td>A (4.0)</td>
+                                    <td>16.0</td>
+                                    <td>18.0</td>
+                                </tr>
+                                <tr>
+                                    <td>Regular Math</td>
+                                    <td>Regular</td>
+                                    <td>3</td>
+                                    <td>A (4.0)</td>
+                                    <td>12.0</td>
+                                    <td>12.0</td>
+                                </tr>
+                                <tr>
+                                    <td>AP History</td>
+                                    <td>AP</td>
+                                    <td>3</td>
+                                    <td>A- (3.7)</td>
+                                    <td>11.1</td>
+                                    <td>14.1</td>
+                                </tr>
+                                <tr className="seo-content__table-total">
+                                    <td colSpan={2}><strong>Total</strong></td>
+                                    <td><strong>14</strong></td>
+                                    <td>—</td>
+                                    <td><strong>51.1</strong></td>
+                                    <td><strong>60.1</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p>
+                        <strong>Unweighted GPA:</strong> 51.1 ÷ 14 = <strong>3.65</strong><br />
+                        <strong>Weighted GPA:</strong> 60.1 ÷ 14 = <strong>4.29</strong>
+                    </p>
+                    <p>
+                        The same student has a 3.65 unweighted but a 4.29 weighted GPA!
+                        This demonstrates how taking challenging courses significantly boosts your weighted GPA.
+                    </p>
+
+                    <h3>Weighted GPA Benchmarks for College Admissions</h3>
+                    <div className="seo-content__table-wrapper">
+                        <table className="seo-content__table">
+                            <thead>
+                                <tr>
+                                    <th>School Type</th>
+                                    <th>Competitive Weighted GPA</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>State universities</td>
+                                    <td>3.5 – 4.0</td>
+                                </tr>
+                                <tr>
+                                    <td>Competitive state schools</td>
+                                    <td>4.0 – 4.3</td>
+                                </tr>
+                                <tr>
+                                    <td>Top 50 universities</td>
+                                    <td>4.2 – 4.5</td>
+                                </tr>
+                                <tr>
+                                    <td>Ivy League / Top 20</td>
+                                    <td>4.5+</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h3>Should You Take AP/Honors Classes?</h3>
+                    <div className="seo-content__scenarios">
+                        <div className="seo-content__scenario">
+                            <h4>✅ Take the harder class if:</h4>
+                            <p>
+                                You&apos;re aiming for competitive colleges, you&apos;re strong in the subject,
+                                or you need the challenge. Even a B in AP looks better than an A in regular to admissions officers.
+                            </p>
+                        </div>
+                        <div className="seo-content__scenario">
+                            <h4>⚠️ Consider regular classes if:</h4>
+                            <p>
+                                You&apos;re already overloaded, struggling in the subject, or the stress would hurt your mental health.
+                                Colleges want to see you challenge yourself, but not fail.
+                            </p>
+                        </div>
+                    </div>
+
+                    <h3>Weighted vs Unweighted: Which Do Colleges Care About?</h3>
+                    <p>
+                        Most colleges recalculate your GPA using their own scale anyway. However, they do look at:
+                    </p>
+                    <ul style={{ marginLeft: "var(--space-6)", marginBottom: "var(--space-4)" }}>
+                        <li><strong>Course rigor:</strong> Did you take the hardest classes available?</li>
+                        <li><strong>Upward trend:</strong> Did your grades improve over time?</li>
+                        <li><strong>Context:</strong> What courses does your school offer?</li>
+                    </ul>
+                    <p>
+                        The bottom line: weighted GPA matters, but course selection matters even more.
+                    </p>
+
+                    <h3>Next Steps</h3>
+                    <p>
+                        After calculating your weighted GPA, use our <a href="/gpa">GPA Workspace</a> with Aim Mode
+                        to see exactly what grades you need in future courses to reach your target.
+                        You can toggle between weighted and unweighted views there.
+                    </p>
+                </section>
+
                 {/* Related Tools */}
                 <RelatedTools currentPath="/gpa-calculators/weighted-gpa-calculator" />
             </div>

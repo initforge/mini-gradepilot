@@ -440,6 +440,185 @@ export default function GPACalculator() {
                     </div>
                 </section>
 
+                {/* Deep SEO Content */}
+                <section className="seo-content">
+                    <h2>What is GPA and How is it Calculated?</h2>
+                    <p>
+                        GPA (Grade Point Average) is a standardized measure of academic achievement used by virtually all US high schools and colleges.
+                        It converts your letter grades into a numerical scale, weighted by the number of credit hours each course is worth.
+                        Most institutions use a 4.0 scale, where an A equals 4.0 points, a B equals 3.0, a C equals 2.0, a D equals 1.0, and an F equals 0.0.
+                    </p>
+                    <p>
+                        The formula is straightforward: <strong>GPA = Total Quality Points ÷ Total Credit Hours</strong>.
+                        Quality points are calculated by multiplying the grade points by the credit hours for each course.
+                    </p>
+
+                    <h3>Worked Example: Calculating Your Semester GPA</h3>
+                    <p>Let's say you completed these courses this semester:</p>
+                    <div className="seo-content__table-wrapper">
+                        <table className="seo-content__table">
+                            <thead>
+                                <tr>
+                                    <th>Course</th>
+                                    <th>Credits</th>
+                                    <th>Grade</th>
+                                    <th>Grade Points</th>
+                                    <th>Quality Points</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>English 101</td>
+                                    <td>3</td>
+                                    <td>A (4.0)</td>
+                                    <td>4.0</td>
+                                    <td>12.0</td>
+                                </tr>
+                                <tr>
+                                    <td>Calculus I</td>
+                                    <td>4</td>
+                                    <td>B+ (3.3)</td>
+                                    <td>3.3</td>
+                                    <td>13.2</td>
+                                </tr>
+                                <tr>
+                                    <td>Biology</td>
+                                    <td>4</td>
+                                    <td>B (3.0)</td>
+                                    <td>3.0</td>
+                                    <td>12.0</td>
+                                </tr>
+                                <tr>
+                                    <td>History</td>
+                                    <td>3</td>
+                                    <td>A- (3.7)</td>
+                                    <td>3.7</td>
+                                    <td>11.1</td>
+                                </tr>
+                                <tr className="seo-content__table-total">
+                                    <td><strong>Total</strong></td>
+                                    <td><strong>14</strong></td>
+                                    <td>—</td>
+                                    <td>—</td>
+                                    <td><strong>48.3</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p>
+                        <strong>Your GPA = 48.3 ÷ 14 = 3.45</strong>
+                    </p>
+                    <p>
+                        Notice how the 4-credit courses (Calculus and Biology) have more impact than the 3-credit courses.
+                        If you improved your Calculus grade from B+ to A, your GPA would jump to 3.65 — a significant increase.
+                    </p>
+
+                    <h3>What is a Good GPA? Benchmarks by Goal</h3>
+                    <p>Your "target GPA" depends on what you're trying to achieve:</p>
+                    <div className="seo-content__table-wrapper">
+                        <table className="seo-content__table">
+                            <thead>
+                                <tr>
+                                    <th>Goal</th>
+                                    <th>Minimum GPA</th>
+                                    <th>Competitive GPA</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Graduate high school</td>
+                                    <td>2.0</td>
+                                    <td>N/A</td>
+                                </tr>
+                                <tr>
+                                    <td>State university admission</td>
+                                    <td>2.5–3.0</td>
+                                    <td>3.3+</td>
+                                </tr>
+                                <tr>
+                                    <td>Competitive universities</td>
+                                    <td>3.5</td>
+                                    <td>3.8+</td>
+                                </tr>
+                                <tr>
+                                    <td>Ivy League / Top 20</td>
+                                    <td>3.7</td>
+                                    <td>3.9+</td>
+                                </tr>
+                                <tr>
+                                    <td>Merit scholarships</td>
+                                    <td>3.0–3.5</td>
+                                    <td>3.7+</td>
+                                </tr>
+                                <tr>
+                                    <td>Dean's List</td>
+                                    <td>3.5–3.7</td>
+                                    <td>—</td>
+                                </tr>
+                                <tr>
+                                    <td>Academic probation (avoid)</td>
+                                    <td>Stay above 2.0</td>
+                                    <td>—</td>
+                                </tr>
+                                <tr>
+                                    <td>Graduate school</td>
+                                    <td>3.0</td>
+                                    <td>3.5+</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h3>If You Want X, Do Y: GPA Planning Strategies</h3>
+                    <div className="seo-content__scenarios">
+                        <div className="seo-content__scenario">
+                            <h4>🎯 "I want to raise my GPA from 3.0 to 3.5"</h4>
+                            <p>
+                                The more credits you've already completed, the harder this becomes.
+                                If you have 60 credits at 3.0, you'd need to earn straight A's (4.0) for the next 60 credits.
+                                More realistic: aim for 3.7+ in future semesters and focus on high-credit courses.
+                            </p>
+                        </div>
+                        <div className="seo-content__scenario">
+                            <h4>🎯 "I'm on academic probation (below 2.0)"</h4>
+                            <p>
+                                Focus on fewer courses, use tutoring resources, and consider retaking failed courses if your school allows grade replacement.
+                                A single F in a 4-credit course can drop your GPA by 0.3–0.5 points.
+                            </p>
+                        </div>
+                        <div className="seo-content__scenario">
+                            <h4>🎯 "I want Dean's List (3.5+)"</h4>
+                            <p>
+                                You need at least 3.5, with most schools requiring full-time enrollment.
+                                Avoid any grade below B+ if possible. One C in a 4-credit course can pull you below the threshold.
+                            </p>
+                        </div>
+                        <div className="seo-content__scenario">
+                            <h4>🎯 "I'm applying to grad school"</h4>
+                            <p>
+                                Most programs want 3.0+, but competitive programs expect 3.5+.
+                                Focus on your major GPA — many programs weight this more heavily than cumulative GPA.
+                            </p>
+                        </div>
+                    </div>
+
+                    <h3>Why Credit Hours Matter More Than You Think</h3>
+                    <p>
+                        Not all grades are created equal. A grade in a 4-credit course affects your GPA twice as much as the same grade in a 2-credit course.
+                        This is why our calculator includes "Impact Analysis" — it shows you which courses have the most leverage.
+                    </p>
+                    <p>
+                        <strong>Pro tip:</strong> If you're struggling in a high-credit course, getting a tutor or spending extra study time
+                        will have a bigger payoff than the same effort in a low-credit elective.
+                    </p>
+
+                    <h3>Next Steps: Planning Your Academic Path</h3>
+                    <p>
+                        After calculating your current GPA, use our <a href="/gpa">GPA Workspace</a> to set targets with Aim Mode.
+                        It will show you exactly what grades you need in upcoming courses to hit your goal.
+                    </p>
+                </section>
+
                 {/* Related Tools */}
                 <RelatedTools currentPath="/gpa-calculators/gpa-calculator" />
             </div>

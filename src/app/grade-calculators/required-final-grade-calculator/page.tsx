@@ -217,7 +217,7 @@ export default function RequiredFinalGradeCalculator() {
                 </div>
 
                 <details className="explanation-section">
-                    <summary>How It's Calculated</summary>
+                    <summary>How It&apos;s Calculated</summary>
                     <div className="explanation-section__content">
                         <p>The required score formula is:</p>
                         <p style={{ fontFamily: "monospace", background: "var(--color-bg-secondary)", padding: "var(--space-2)", borderRadius: "var(--radius-sm)", marginTop: "var(--space-2)" }}>
@@ -229,6 +229,144 @@ export default function RequiredFinalGradeCalculator() {
                         </p>
                     </div>
                 </details>
+
+                {/* Deep SEO Content */}
+                <section className="seo-content">
+                    <h2>What Grade Do I Need on My Final?</h2>
+                    <p>
+                        This is one of the most common questions students ask, especially as finals week approaches.
+                        The answer depends on three factors: your current grade in the class, your target grade, and how much the final exam is worth.
+                    </p>
+                    <p>
+                        Our calculator uses the weighted average formula to determine exactly what score you need on your final exam
+                        to achieve your desired grade. It also shows you what-if scenarios so you can see how different exam scores
+                        would affect your final grade.
+                    </p>
+
+                    <h3>Worked Example: What Score Do I Need to Get a B?</h3>
+                    <p>Let&apos;s say you have these grades going into finals:</p>
+                    <ul style={{ marginLeft: "var(--space-6)", marginBottom: "var(--space-4)" }}>
+                        <li><strong>Current Grade:</strong> 78% (C+)</li>
+                        <li><strong>Target Grade:</strong> 80% (B-)</li>
+                        <li><strong>Final Exam Weight:</strong> 25%</li>
+                    </ul>
+                    <p>Using the formula:</p>
+                    <div style={{ fontFamily: "monospace", background: "var(--color-bg)", padding: "var(--space-3)", borderRadius: "var(--radius-md)", marginBottom: "var(--space-4)" }}>
+                        Required = (80 - 78 × 0.75) ÷ 0.25<br />
+                        Required = (80 - 58.5) ÷ 0.25<br />
+                        Required = 21.5 ÷ 0.25<br />
+                        Required = <strong>86%</strong>
+                    </div>
+                    <p>
+                        You need an <strong>86%</strong> on your final to raise your grade from a C+ to a B-.
+                        That&apos;s challenging but achievable with focused studying.
+                    </p>
+
+                    <h3>Letter Grade Thresholds</h3>
+                    <p>Here&apos;s the standard US grading scale for reference:</p>
+                    <div className="seo-content__table-wrapper">
+                        <table className="seo-content__table">
+                            <thead>
+                                <tr>
+                                    <th>Letter Grade</th>
+                                    <th>Percentage</th>
+                                    <th>GPA Points</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>A</td><td>93-100%</td><td>4.0</td></tr>
+                                <tr><td>A-</td><td>90-92%</td><td>3.7</td></tr>
+                                <tr><td>B+</td><td>87-89%</td><td>3.3</td></tr>
+                                <tr><td>B</td><td>83-86%</td><td>3.0</td></tr>
+                                <tr><td>B-</td><td>80-82%</td><td>2.7</td></tr>
+                                <tr><td>C+</td><td>77-79%</td><td>2.3</td></tr>
+                                <tr><td>C</td><td>73-76%</td><td>2.0</td></tr>
+                                <tr><td>C-</td><td>70-72%</td><td>1.7</td></tr>
+                                <tr><td>D</td><td>60-69%</td><td>1.0</td></tr>
+                                <tr><td>F</td><td>Below 60%</td><td>0.0</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h3>Realistic Expectations Based on Required Score</h3>
+                    <div className="seo-content__scenarios">
+                        <div className="seo-content__scenario">
+                            <h4>🟢 Under 70% required</h4>
+                            <p>
+                                Very achievable. You can likely pass with minimal additional studying.
+                                Focus on avoiding careless mistakes.
+                            </p>
+                        </div>
+                        <div className="seo-content__scenario">
+                            <h4>🟡 70-85% required</h4>
+                            <p>
+                                Achievable with good preparation. Make a study plan,
+                                review past exams, and get enough sleep before the test.
+                            </p>
+                        </div>
+                        <div className="seo-content__scenario">
+                            <h4>🟠 85-95% required</h4>
+                            <p>
+                                Challenging. You&apos;ll need to know the material well.
+                                Consider forming a study group or getting tutoring.
+                            </p>
+                        </div>
+                        <div className="seo-content__scenario">
+                            <h4>🔴 Over 95% required</h4>
+                            <p>
+                                Very difficult. Consider whether this target is realistic.
+                                A slightly lower grade might be more achievable with less stress.
+                            </p>
+                        </div>
+                    </div>
+
+                    <h3>Tips for Hitting Your Target Score</h3>
+                    <ul style={{ marginLeft: "var(--space-6)", marginBottom: "var(--space-4)" }}>
+                        <li><strong>Know the format:</strong> Multiple choice? Essays? Problems? Prepare accordingly.</li>
+                        <li><strong>Review past exams:</strong> Professors often reuse question styles.</li>
+                        <li><strong>Focus on weak areas:</strong> Don&apos;t just study what you already know.</li>
+                        <li><strong>Get sleep:</strong> All-nighters usually hurt more than they help.</li>
+                        <li><strong>Start early:</strong> Cramming is less effective than spaced repetition.</li>
+                    </ul>
+
+                    <h3>What If I Need Over 100%?</h3>
+                    <p>
+                        If the calculator shows you need more than 100%, you mathematically cannot reach your target grade on this exam alone.
+                        Your options:
+                    </p>
+                    <ul style={{ marginLeft: "var(--space-6)", marginBottom: "var(--space-4)" }}>
+                        <li>Check if there&apos;s extra credit available</li>
+                        <li>Ask about retaking or dropping the lowest grade</li>
+                        <li>Accept a slightly lower final grade (it&apos;s not the end of the world)</li>
+                        <li>Talk to your professor about your situation</li>
+                    </ul>
+
+                    <h3>Next Steps</h3>
+                    <p>
+                        After determining your required score, use our <a href="/course">Course Grade Analyzer</a> to break down
+                        all your assignment categories and see exactly where your grade stands.
+                        Or check your overall <a href="/gpa">GPA Workspace</a> to see how this course affects your cumulative GPA.
+                    </p>
+                </section>
+
+                {/* Related Tools */}
+                <section style={{ marginTop: "var(--space-8)" }}>
+                    <h3 style={{ marginBottom: "var(--space-4)" }}>Related Tools</h3>
+                    <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "var(--space-4)" }}>
+                        <a href="/grade-calculators/final-grade-calculator" className="card card--hover" style={{ padding: "var(--space-4)", textDecoration: "none" }}>
+                            <strong style={{ color: "var(--color-text)" }}>Final Grade Calculator</strong>
+                            <p style={{ fontSize: "var(--text-sm)", color: "var(--color-text-muted)", marginTop: "var(--space-1)" }}>
+                                Calculate your current weighted average
+                            </p>
+                        </a>
+                        <a href="/course" className="card card--hover" style={{ padding: "var(--space-4)", textDecoration: "none" }}>
+                            <strong style={{ color: "var(--color-text)" }}>Course Grade Analyzer</strong>
+                            <p style={{ fontSize: "var(--text-sm)", color: "var(--color-text-muted)", marginTop: "var(--space-1)" }}>
+                                Full breakdown of your course grade
+                            </p>
+                        </a>
+                    </div>
+                </section>
             </div>
         </div>
     );

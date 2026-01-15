@@ -1979,3 +1979,122 @@ h4 {
     font-size: 3rem;
   }
 }
+
+/* ─────────────────────────────────────────────────────────────
+   SEO CONTENT SECTION (Deep educational content for ranking)
+───────────────────────────────────────────────────────────── */
+.seo-content {
+  margin-top: var(--space-8);
+  padding: var(--space-6);
+  background: var(--color-bg-secondary);
+  border-radius: var(--radius-xl);
+  line-height: 1.8;
+}
+
+.seo-content h2 {
+  font-size: var(--text-2xl);
+  margin-bottom: var(--space-4);
+  color: var(--color-text);
+}
+
+.seo-content h3 {
+  font-size: var(--text-lg);
+  margin-top: var(--space-6);
+  margin-bottom: var(--space-3);
+  color: var(--color-text);
+}
+
+.seo-content h4 {
+  font-size: var(--text-base);
+  margin-bottom: var(--space-2);
+  color: var(--color-text);
+}
+
+.seo-content p {
+  margin-bottom: var(--space-4);
+  color: var(--color-text-muted);
+}
+
+.seo-content a {
+  color: var(--color-primary);
+  text-decoration: underline;
+}
+
+.seo-content a:hover {
+  color: var(--color-primary-hover);
+}
+
+/* SEO Tables */
+.seo-content__table-wrapper {
+  overflow-x: auto;
+  margin: var(--space-4) 0;
+}
+
+.seo-content__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-sm);
+  background: var(--color-bg);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.seo-content__table th,
+.seo-content__table td {
+  padding: var(--space-3) var(--space-4);
+  text-align: left;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.seo-content__table th {
+  background: var(--color-bg-tertiary);
+  font-weight: var(--font-semibold);
+  color: var(--color-text);
+}
+
+.seo-content__table tbody tr:hover {
+  background: var(--color-bg-secondary);
+}
+
+.seo-content__table-total {
+  background: var(--color-primary-light) !important;
+}
+
+.seo-content__table-total td {
+  border-bottom: none;
+}
+
+/* Scenario Cards */
+.seo-content__scenarios {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-4);
+  margin: var(--space-4) 0;
+}
+
+.seo-content__scenario {
+  background: var(--color-bg);
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+}
+
+.seo-content__scenario h4 {
+  margin-bottom: var(--space-2);
+  color: var(--color-primary);
+}
+
+.seo-content__scenario p {
+  margin-bottom: 0;
+  font-size: var(--text-sm);
+}
+
+@media (max-width: 768px) {
+  .seo-content__scenarios {
+    grid-template-columns: 1fr;
+  }
+
+  .seo-content {
+    padding: var(--space-4);
+  }
+}
