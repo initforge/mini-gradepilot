@@ -2,6 +2,8 @@
 
 **Academic Decision Workspace for US Students** — Calculate GPA, analyze grades, and make data-driven academic decisions.
 
+🌐 **Live**: https://gradepilot.org
+
 ---
 
 ## 🚀 Quick Start
@@ -24,7 +26,7 @@ Open [http://localhost:3000](http://localhost:3000) to view the app.
 | State | Zustand (localStorage persisted) |
 | Styling | CSS Variables + Custom Design System |
 | Icons | Custom branded SVG system |
-| Deployment | DigitalOcean VPS + Cloudflare |
+| Deployment | Docker + Nginx (VPS) |
 
 ---
 
@@ -32,44 +34,48 @@ Open [http://localhost:3000](http://localhost:3000) to view the app.
 
 | Workspace | Route | Description |
 |-----------|-------|-------------|
-| **GPA Workspace** | `/gpa` | Semester management, Aim Mode targeting |
-| **Course Analyzer** | `/course` | Final grade calculator, "What score do I need?" |
-| **Transcript** | `/transcript` | Cumulative GPA tracking across semesters |
+| **GPA Workspace** | `/gpa` | Semester management, Aim Mode targeting, weighted/unweighted toggle |
+| **Course Analyzer** | `/course` | Weight breakdown, "What score do I need?" calculator |
+| **Transcript** | `/transcript` | Cumulative GPA tracking, trend visualization |
 
 ---
 
 ## 🔧 Standalone Calculators
 
-- `/gpa-calculators/gpa-calculator`
-- `/gpa-calculators/weighted-gpa-calculator`
-- `/gpa-calculators/college-gpa-calculator`
-- `/gpa-calculators/high-school-gpa-calculator`
-- `/grade-calculators/final-grade-calculator`
-- `/grade-calculators/required-final-grade-calculator`
-- `/converters/percentage-to-gpa`
-- `/attendance/attendance-percentage-calculator`
+| Calculator | Route |
+|------------|-------|
+| GPA Calculator | `/gpa-calculators/gpa-calculator` |
+| Weighted GPA Calculator | `/gpa-calculators/weighted-gpa-calculator` |
+| College GPA Calculator | `/gpa-calculators/college-gpa-calculator` |
+| High School GPA Calculator | `/gpa-calculators/high-school-gpa-calculator` |
+| Final Grade Calculator | `/grade-calculators/final-grade-calculator` |
+| Required Final Grade Calculator | `/grade-calculators/required-final-grade-calculator` |
+| Percentage to GPA | `/converters/percentage-to-gpa` |
 
 ---
 
-## 🌐 Deployment
+## 🌐 Production Deployment
 
-### Build & Start
+### Docker (Recommended)
 ```bash
-npm run build
-npm run start
+# Build and start
+docker compose up -d --build
+
+# View logs
+docker logs gradepilot -f
 ```
 
-### PM2 (Production)
-```bash
-pm2 start npm --name "gradepilot" -- start
-pm2 save
-pm2 startup
-```
+### Nginx Configuration
+Located at `/etc/nginx/sites-available/gradepilot` on VPS.
+- HTTP/2 enabled
+- gzip compression
+- SSL via Let's Encrypt
+- Static asset caching (7 days)
 
-### Cloudflare Configuration
-- **DNS**: A record → VPS IP (Proxied ☁️)
-- **SSL**: Full (strict)
-- **Cache**: Standard
+### SSL Renewal
+```bash
+certbot renew --dry-run
+```
 
 ---
 
@@ -79,7 +85,8 @@ pm2 startup
 |------|---------|
 | `src/app/sitemap.ts` | Dynamic sitemap generation |
 | `src/app/robots.ts` | Crawler instructions |
-| `SEO_CHECKLIST.md` | Deployment checklist |
+| `public/sitemap.xml` | Static sitemap backup |
+| `SEO_CHECKLIST.md` | Deployment & traffic checklist |
 
 ---
 
@@ -96,10 +103,16 @@ src/
 │   └── grade-calculators/ # Standalone grade tools
 ├── components/
 │   ├── Icons.tsx          # Branded SVG icons
-│   ├── SEOContent.tsx     # FAQ, ExplanationBlock, ExampleBlock
+│   ├── SEOContent.tsx     # FAQ, ExplanationBlock
 │   └── WorkspaceNav.tsx   # Cross-workspace navigation
 └── lib/
     └── useAcademicStore.ts # Zustand state management
+
+nginx/
+└── nginx.conf             # Production nginx config
+
+docker-compose.yml         # Container orchestration
+Dockerfile                 # Multi-stage build
 ```
 
 ---
@@ -115,4 +128,4 @@ src/
 
 ---
 
-*Last updated: January 15, 2026*
+*Last updated: January 16, 2026*
