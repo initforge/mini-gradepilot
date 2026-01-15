@@ -614,8 +614,13 @@ export default function GPACalculator() {
 
                     <h3>Next Steps: Planning Your Academic Path</h3>
                     <p>
-                        After calculating your current GPA, use our <a href="/gpa">GPA Workspace</a> to set targets with Aim Mode.
-                        It will show you exactly what grades you need in upcoming courses to hit your goal.
+                        If you&apos;re planning future semesters or trying to raise your GPA,
+                        the <a href="/gpa"><strong>GPA Workspace</strong></a> shows exactly what grades you need
+                        in each upcoming course to hit your target. The Aim Mode feature calculates this automatically.
+                    </p>
+                    <p style={{ marginTop: "var(--space-4)", padding: "var(--space-4)", background: "var(--color-bg-secondary)", borderRadius: "var(--radius-md)", borderLeft: "4px solid var(--color-primary)" }}>
+                        <strong>💡 Bookmark this page</strong> — come back after midterms or finals to recalculate.
+                        Your data is saved locally in your browser, so your courses will still be here.
                     </p>
                 </section>
 

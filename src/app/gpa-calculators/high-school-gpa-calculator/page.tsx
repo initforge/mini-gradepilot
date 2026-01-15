@@ -444,6 +444,10 @@ export default function HighSchoolGPACalculator() {
                         For weighted GPA calculations with AP/Honors bonuses, try our
                         <a href="/gpa-calculators/weighted-gpa-calculator"> Weighted GPA Calculator</a>.
                     </p>
+                    <p style={{ marginTop: "var(--space-4)", padding: "var(--space-4)", background: "var(--color-bg-secondary)", borderRadius: "var(--radius-md)", borderLeft: "4px solid var(--color-primary)" }}>
+                        <strong>📌 Save this page</strong> — update your GPA after each semester.
+                        Your data stays in your browser, no account needed.
+                    </p>
                 </section>
 
                 {/* Related Tools */}

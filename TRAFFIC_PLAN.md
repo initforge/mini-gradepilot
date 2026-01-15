@@ -133,4 +133,19 @@ For quick calculations: gradepilot.org
 
 ---
 
+## 🟢 Zero-Effort Passive SEO
+
+### AnswerThePublic / People Also Ask
+Tìm câu hỏi phổ biến → viết 2-3 câu trả lời → paste vào FAQ/content.
+
+**Câu hỏi target:**
+- "What GPA do I need for [school name]?"
+- "Is 3.5 GPA good for college?"
+- "How to calculate weighted GPA?"
+- "Can I raise my GPA senior year?"
+
+**Không cần blog riêng** — chỉ cần thêm vào content có sẵn.
+
+---
+
 *Last updated: January 16, 2026*

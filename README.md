@@ -2,6 +2,8 @@
 
 **Academic Decision Workspace for US Students** — Calculate GPA, analyze grades, and make data-driven academic decisions.
 
+*Built for US high school & college students dealing with GPA pressure.*
+
 🌐 **Live**: https://gradepilot.org
 
 ---
