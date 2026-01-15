@@ -71,13 +71,12 @@ export default function TermsPage() {
                                 2. Service Description
                             </h2>
                             <p style={{ color: "var(--color-text-muted)", marginBottom: "var(--space-3)" }}>
-                                GradePilot provides free academic calculators including:
+                                GradePilot provides free academic tools including:
                             </p>
                             <ul style={{ color: "var(--color-text-muted)", paddingLeft: "var(--space-5)", marginBottom: "0" }}>
+                                <li>Core workspaces (GPA, Course, Transcript)</li>
                                 <li>GPA calculators (standard, weighted, college, high school)</li>
                                 <li>Grade calculators (final grade, required grade)</li>
-                                <li>Converters (percentage to GPA)</li>
-                                <li>Attendance calculators</li>
                             </ul>
                         </div>
 

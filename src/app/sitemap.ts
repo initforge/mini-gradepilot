@@ -18,9 +18,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
         // Grade Calculators
         "/grade-calculators/final-grade-calculator",
         "/grade-calculators/required-final-grade-calculator",
-        // Converters & Utilities
-        "/converters/percentage-to-gpa",
-        "/attendance/attendance-percentage-calculator",
         // Info Pages
         "/about",
         "/privacy",

@@ -4,7 +4,7 @@ import { IconChartBar, IconCourse, IconTranscript } from "@/components/Icons";
 
 export const metadata: Metadata = {
   title: "GradePilot - Academic Decision Workspace for US Students",
-  description: "Analyze your academics, plan your path, make smarter decisions. Free workspaces for GPA analysis, course grades, transcripts, and attendance.",
+  description: "Analyze your academics, plan your path, make smarter decisions. Free workspaces for GPA analysis, course grades, and transcripts.",
 };
 
 // Workspace definitions - 4 core workspaces
