@@ -140,17 +140,7 @@ export default function Home() {
 
             <Link
               href="/gpa"
-              className="btn"
-              style={{
-                background: "#f97316",
-                color: "white",
-                padding: "var(--space-4) var(--space-8)",
-                fontSize: "var(--text-lg)",
-                fontWeight: 600,
-                borderRadius: "var(--radius-lg)",
-                display: "inline-block",
-                boxShadow: "0 8px 30px rgba(249, 115, 22, 0.4)",
-              }}
+              className="hero-cta"
             >
               Open GPA Workspace →
             </Link>

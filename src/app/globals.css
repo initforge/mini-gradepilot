@@ -438,6 +438,42 @@ h4 {
 }
 
 /* ─────────────────────────────────────────────────────────────
+   HERO CTA BUTTON (Mike11jr style multi-layer shadow)
+───────────────────────────────────────────────────────────── */
+.hero-cta {
+  display: inline-block;
+  padding: 18px 40px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  background: #f97316;
+  border: none;
+  border-radius: 8px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  box-shadow: 0 4px 15px rgba(249, 115, 22, 0.4);
+}
+
+.hero-cta:hover {
+  color: #fff;
+  transform: translateY(-10px);
+  box-shadow:
+    0 7px 0 -2px #ea580c,
+    0 15px 0 -4px #14b8a6,
+    0 20px 25px -5px rgba(20, 184, 166, 0.4);
+}
+
+.hero-cta:active {
+  transition: all 0.2s;
+  transform: translateY(-5px);
+  box-shadow:
+    0 3px 0 -2px #ea580c,
+    0 8px 0 -4px #14b8a6,
+    0 12px 15px -3px rgba(20, 184, 166, 0.3);
+}
+
+/* ─────────────────────────────────────────────────────────────
    7. CARDS
 ───────────────────────────────────────────────────────────── */
 .card {
