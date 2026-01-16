@@ -68,9 +68,15 @@ docker logs gradepilot -f
 
 ### VPS Update
 ```bash
-cd ~/gradepilot
+cd ~/mini-gradepilot
 git pull
 docker compose up -d --build
+```
+
+### First-time Deploy
+```bash
+cd ~ && git clone https://github.com/initforge/mini-gradepilot.git
+cd mini-gradepilot && docker compose up -d --build
 ```
 
 ### SSL Renewal
