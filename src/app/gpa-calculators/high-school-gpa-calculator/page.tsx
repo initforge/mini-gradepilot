@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import { CornerCTA } from "@/components/FancyButtons";
 
 interface YearData {
     year: string;
@@ -179,20 +180,9 @@ export default function HighSchoolGPACalculator() {
                             <p style={{ color: "rgba(255,255,255,0.9)", marginBottom: "var(--space-4)" }}>
                                 To see what grades you need to reach your target GPA for college:
                             </p>
-                            <a
-                                href="/gpa"
-                                style={{
-                                    display: "inline-block",
-                                    background: "white",
-                                    color: "#0d9488",
-                                    padding: "var(--space-3) var(--space-6)",
-                                    borderRadius: "var(--radius-md)",
-                                    fontWeight: 600,
-                                    textDecoration: "none"
-                                }}
-                            >
-                                Plan Your Target GPA →
-                            </a>
+                            <CornerCTA href="/gpa">
+                                Plan Your Target GPA
+                            </CornerCTA>
                         </div>
                     )}
                 </div>

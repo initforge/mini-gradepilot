@@ -421,6 +421,22 @@ h4 {
   min-height: 32px;
 }
 
+/* Button Active/Press States - CSS-only, GPU-accelerated */
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn--primary:active {
+  transform: scale(0.97) translateY(0);
+}
+
+.btn--secondary:active,
+.btn--destructive:active,
+.btn--ghost:active,
+.btn--success:active {
+  transform: scale(0.97);
+}
+
 /* ─────────────────────────────────────────────────────────────
    7. CARDS
 ───────────────────────────────────────────────────────────── */
@@ -437,12 +453,36 @@ h4 {
 }
 
 .card--hover {
-  transition: all var(--transition-base);
+  position: relative;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Pulse effect background (cssbuttons-io style) */
+.card--hover::after {
+  content: "";
+  display: block;
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: inherit;
+  z-index: -1;
+  transition: all 0.4s ease;
+  opacity: 0.6;
 }
 
 .card--hover:hover {
-  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+}
+
+.card--hover:hover::after {
+  transform: scaleX(1.03) scaleY(1.06);
+  opacity: 0;
+}
+
+.card--hover:active {
   transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
 /* ─────────────────────────────────────────────────────────────

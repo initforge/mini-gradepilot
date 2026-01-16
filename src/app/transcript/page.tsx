@@ -10,6 +10,7 @@ import {
 import { IconBookOpen, IconTrendUp, IconTrendDown, IconTrendFlat, IconIdea, IconBalance, IconNote, IconEmpty } from "@/components/Icons";
 import WorkspaceNav from "@/components/WorkspaceNav";
 import ProfileSwitcher from "@/components/ProfileSwitcher";
+import { SlideToggleButton, TabToggle } from "@/components/FancyButtons";
 import { FAQSection, generateFAQSchema, RelatedTools, ExplanationBlock, ExampleBlock } from "@/components/SEOContent";
 
 // Transcript FAQ Data
@@ -60,14 +61,14 @@ export default function TranscriptWorkspace() {
     const [weighted, setWeighted] = useState(false);
     const [viewMode, setViewMode] = useState<"college" | "highschool">("college");
 
-    const { profiles, activeProfileId, createProfile } = useAcademicStore();
+    const { profiles, activeProfileId, createProfile, _hasHydrated } = useAcademicStore();
 
     useEffect(() => {
         setMounted(true);
-        if (profiles.length === 0) {
+        if (_hasHydrated && profiles.length === 0) {
             createProfile("My Profile");
         }
-    }, [profiles.length, createProfile]);
+    }, [_hasHydrated, profiles.length, createProfile]);
 
     if (!mounted) {
         return <div style={{ minHeight: "100vh", background: "#f8fafc" }} />;
@@ -128,67 +129,24 @@ export default function TranscriptWorkspace() {
 
                         <div style={{ display: "flex", alignItems: "center", gap: "var(--space-2)", flexWrap: "wrap", position: "relative" }}>
                             {/* Weighted Toggle */}
-                            <button
+                            <SlideToggleButton
+                                active={weighted}
                                 onClick={() => setWeighted(!weighted)}
-                                style={{
-                                    background: weighted ? "#8b5cf6" : "rgba(255,255,255,0.1)",
-                                    border: weighted ? "2px solid #a78bfa" : "2px solid rgba(255,255,255,0.2)",
-                                    color: "white",
-                                    padding: "8px 16px",
-                                    borderRadius: "var(--radius-md)",
-                                    fontWeight: 600,
-                                    cursor: "pointer",
-                                    transition: "all 0.15s ease",
-                                    height: 40,
-                                    display: "flex",
-                                    alignItems: "center",
-                                    gap: "6px",
-                                    fontSize: "13px",
-                                }}
-                            >
-                                <IconBalance style={{ width: "16px", height: "16px" }} />
-                                Weighted {weighted ? "ON" : "OFF"}
-                            </button>
+                                icon={<IconBalance style={{ width: 16, height: 16 }} />}
+                                activeLabel="Weighted ON"
+                                inactiveLabel="Weighted OFF"
+                                activeColor="#8b5cf6"
+                            />
 
                             {/* View Mode Toggle */}
-                            <div style={{
-                                display: "flex",
-                                background: "rgba(255,255,255,0.1)",
-                                borderRadius: "var(--radius-md)",
-                                padding: 2,
-                                height: 40,
-                            }}>
-                                <button
-                                    onClick={() => setViewMode("college")}
-                                    style={{
-                                        background: viewMode === "college" ? "white" : "transparent",
-                                        color: viewMode === "college" ? "var(--color-primary)" : "white",
-                                        border: "none",
-                                        padding: "0 12px",
-                                        borderRadius: "var(--radius-sm)",
-                                        fontWeight: 600,
-                                        cursor: "pointer",
-                                        fontSize: "13px",
-                                    }}
-                                >
-                                    College
-                                </button>
-                                <button
-                                    onClick={() => setViewMode("highschool")}
-                                    style={{
-                                        background: viewMode === "highschool" ? "white" : "transparent",
-                                        color: viewMode === "highschool" ? "var(--color-primary)" : "white",
-                                        border: "none",
-                                        padding: "0 12px",
-                                        borderRadius: "var(--radius-sm)",
-                                        fontWeight: 600,
-                                        cursor: "pointer",
-                                        fontSize: "13px",
-                                    }}
-                                >
-                                    High School
-                                </button>
-                            </div>
+                            <TabToggle
+                                options={[
+                                    { value: "college", label: "College" },
+                                    { value: "highschool", label: "High School" }
+                                ]}
+                                selected={viewMode}
+                                onChange={(v) => setViewMode(v as "college" | "highschool")}
+                            />
 
                             <ProfileSwitcher />
                         </div>

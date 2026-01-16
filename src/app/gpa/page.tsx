@@ -13,6 +13,7 @@ import { IconChartBar, IconScale, IconConverter, IconIdea, IconCheckCircle, Icon
 import { DeleteButton, AddButton } from "@/components/AnimatedButtons";
 import WorkspaceNav from "@/components/WorkspaceNav";
 import ProfileSwitcher from "@/components/ProfileSwitcher";
+import { SlideToggleButton, OutlineButton } from "@/components/FancyButtons";
 import { FAQSection, generateFAQSchema, RelatedTools, ExplanationBlock, ExampleBlock } from "@/components/SEOContent";
 
 // GPA Workspace FAQ Data
@@ -82,15 +83,16 @@ export default function GPAWorkspace() {
         updateCourse,
         deleteCourse,
         clearAllData,
+        _hasHydrated,
     } = useAcademicStore();
 
     useEffect(() => {
         setMounted(true);
-        // Auto-create profile if none exists
-        if (profiles.length === 0) {
+        // Auto-create profile if none exists AND store has hydrated from localStorage
+        if (_hasHydrated && profiles.length === 0) {
             createProfile("My Profile");
         }
-    }, [profiles.length, createProfile]);
+    }, [_hasHydrated, profiles.length, createProfile]);
 
     if (!mounted) {
         return <div style={{ minHeight: "100vh", background: "#f8fafc" }} />;
@@ -233,50 +235,23 @@ export default function GPAWorkspace() {
 
                         <div style={{ display: "flex", alignItems: "center", gap: "var(--space-2)", flexWrap: "wrap" }}>
                             {/* Weighted Toggle */}
-                            <button
+                            <SlideToggleButton
+                                active={weighted}
                                 onClick={() => setWeighted(!weighted)}
-                                style={{
-                                    background: weighted ? "#7c3aed" : "rgba(255,255,255,0.1)",
-                                    border: weighted ? "2px solid #6d28d9" : "2px solid rgba(255,255,255,0.25)",
-                                    color: "white",
-                                    padding: "8px 16px",
-                                    borderRadius: "var(--radius-md)",
-                                    fontWeight: 600,
-                                    cursor: "pointer",
-                                    transition: "all 0.15s ease",
-                                    display: "flex",
-                                    alignItems: "center",
-                                    gap: "6px",
-                                    fontSize: "13px",
-                                    height: 40,
-                                }}
-                            >
-                                <IconScale style={{ width: 18, height: 18, flexShrink: 0, color: weighted ? "#e9d5ff" : "#a78bfa" }} />
-                                Weighted {weighted ? "ON" : "OFF"}
-                            </button>
+                                icon={<IconScale style={{ width: 18, height: 18, color: weighted ? "#e9d5ff" : "#a78bfa" }} />}
+                                activeLabel="Weighted ON"
+                                inactiveLabel="Weighted OFF"
+                                activeColor="#7c3aed"
+                            />
 
                             {/* Convert Button */}
-                            <button
+                            <OutlineButton
+                                active={showConverter}
                                 onClick={() => setShowConverter(!showConverter)}
-                                style={{
-                                    background: showConverter ? "#f97316" : "rgba(255,255,255,0.1)",
-                                    border: showConverter ? "2px solid #ea580c" : "2px solid rgba(255,255,255,0.25)",
-                                    color: "white",
-                                    padding: "8px 16px",
-                                    borderRadius: "var(--radius-md)",
-                                    fontWeight: 600,
-                                    cursor: "pointer",
-                                    transition: "all 0.15s ease",
-                                    display: "flex",
-                                    alignItems: "center",
-                                    gap: "6px",
-                                    fontSize: "13px",
-                                    height: 40,
-                                }}
-                            >
-                                <IconConverter style={{ width: 18, height: 18, flexShrink: 0, color: showConverter ? "#fff" : "#fdba74" }} />
-                                % → GPA
-                            </button>
+                                icon={<IconConverter style={{ width: 18, height: 18, color: showConverter ? "#fff" : "#fdba74" }} />}
+                                label="% → GPA"
+                                activeColor="#f97316"
+                            />
 
                             <ProfileSwitcher />
                         </div>

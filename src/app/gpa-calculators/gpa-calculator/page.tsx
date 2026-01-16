@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import type { Metadata } from "next";
+import { CornerCTA } from "@/components/FancyButtons";
 
 const GRADE_POINTS: Record<string, number> = {
     "A+": 4.0, A: 4.0, "A-": 3.7,
@@ -196,21 +196,9 @@ export default function GPACalculator() {
                             <p style={{ color: "rgba(255,255,255,0.9)", marginBottom: "var(--space-4)" }}>
                                 To plan how to raise your GPA, track across semesters, and save your data:
                             </p>
-                            <a
-                                href="/gpa"
-                                style={{
-                                    display: "inline-block",
-                                    background: "white",
-                                    color: "#0d9488",
-                                    padding: "var(--space-3) var(--space-6)",
-                                    borderRadius: "var(--radius-md)",
-                                    fontWeight: 600,
-                                    textDecoration: "none",
-                                    fontSize: "var(--text-base)"
-                                }}
-                            >
-                                Open GPA Workspace →
-                            </a>
+                            <CornerCTA href="/gpa">
+                                Open GPA Workspace
+                            </CornerCTA>
                         </div>
                     )}
                 </div>

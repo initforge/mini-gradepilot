@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useAcademicStore } from "@/lib/useAcademicStore";
 import { IconUser } from "@/components/Icons";
+import styles from "./FancyButtons.module.css";
 
 export default function ProfileSwitcher() {
     const [isOpen, setIsOpen] = useState(false);
@@ -62,33 +63,17 @@ export default function ProfileSwitcher() {
         <div style={{ position: "relative" }}>
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "var(--space-3)",
-                    background: "rgba(255,255,255,0.1)",
-                    color: "white",
-                    border: "1px solid rgba(255,255,255,0.2)",
-                    padding: "6px 16px", // Specific padding for height match
-                    borderRadius: "var(--radius-md)",
-                    fontWeight: 600,
-                    cursor: "pointer",
-                    fontSize: "var(--text-sm)",
-                    height: "44px", // Match buttons
-                    transition: "background 0.2s"
-                }}
+                className={styles.profileBtn}
             >
-                <div style={{
-                    width: 24, height: 24,
-                    background: "#2dd4bf", // teal-400
-                    borderRadius: "50%",
-                    display: "flex", alignItems: "center", justifyContent: "center",
-                    color: "#0f172a"
-                }}>
+                <span className={styles.profileBtnIcon}>
                     <IconUser className="w-4 h-4" />
-                </div>
-                {activeProfile?.name || "Select Profile"}
-                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="2">
+                </span>
+                <span className={styles.profileBtnText}>
+                    <span className={styles.profileBtnTextInner}>
+                        {activeProfile?.name || "Select Profile"}
+                    </span>
+                </span>
+                <svg className={styles.profileBtnChevron} width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="2">
                     <path d="M2 4l4 4 4-4" />
                 </svg>
             </button>
@@ -146,8 +131,40 @@ export default function ProfileSwitcher() {
                                                 color: "white",
                                             }}
                                         />
-                                        <button onClick={() => handleRename(profile.id)} style={{ border: "none", background: "var(--color-primary)", color: "white", borderRadius: "var(--radius-sm)", cursor: "pointer" }}>✓</button>
-                                        <button onClick={() => setIsEditing(null)} style={{ border: "none", background: "#e2e8f0", color: "#64748b", borderRadius: "var(--radius-sm)", cursor: "pointer" }}>×</button>
+                                        <button
+                                            onClick={() => handleRename(profile.id)}
+                                            style={{
+                                                width: 28,
+                                                height: 28,
+                                                border: "none",
+                                                background: "var(--color-primary)",
+                                                color: "white",
+                                                borderRadius: "var(--radius-sm)",
+                                                cursor: "pointer",
+                                                display: "flex",
+                                                alignItems: "center",
+                                                justifyContent: "center",
+                                                fontSize: "14px",
+                                                fontWeight: 700,
+                                            }}
+                                        >✓</button>
+                                        <button
+                                            onClick={() => setIsEditing(null)}
+                                            style={{
+                                                width: 28,
+                                                height: 28,
+                                                border: "none",
+                                                background: "#475569",
+                                                color: "white",
+                                                borderRadius: "var(--radius-sm)",
+                                                cursor: "pointer",
+                                                display: "flex",
+                                                alignItems: "center",
+                                                justifyContent: "center",
+                                                fontSize: "16px",
+                                                fontWeight: 400,
+                                            }}
+                                        >×</button>
                                     </div>
                                 ) : (
                                     <div

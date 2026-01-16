@@ -38,6 +38,10 @@ export interface Profile {
 }
 
 interface AcademicStore {
+    // Hydration tracking
+    _hasHydrated: boolean;
+    setHasHydrated: (state: boolean) => void;
+
     // Profiles
     profiles: Profile[];
     activeProfileId: string | null;
@@ -71,6 +75,9 @@ const generateId = () => Math.random().toString(36).substring(2, 9);
 export const useAcademicStore = create<AcademicStore>()(
     persist(
         (set, get) => ({
+            _hasHydrated: false,
+            setHasHydrated: (state) => set({ _hasHydrated: state }),
+
             profiles: [],
             activeProfileId: null,
 
@@ -241,6 +248,9 @@ export const useAcademicStore = create<AcademicStore>()(
         }),
         {
             name: "gradepilot-academic-store",
+            onRehydrateStorage: () => (state) => {
+                state?.setHasHydrated(true);
+            },
         }
     )
 );

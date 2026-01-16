@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import { CornerCTA } from "@/components/FancyButtons";
 
 interface Category {
     name: string;
@@ -199,20 +200,9 @@ export default function FinalGradeCalculator() {
                             <p style={{ color: "rgba(255,255,255,0.9)", marginBottom: "var(--space-4)" }}>
                                 To see how individual assignments affect your grade and plan improvements:
                             </p>
-                            <a
-                                href="/course"
-                                style={{
-                                    display: "inline-block",
-                                    background: "white",
-                                    color: "#ea580c",
-                                    padding: "var(--space-3) var(--space-6)",
-                                    borderRadius: "var(--radius-md)",
-                                    fontWeight: 600,
-                                    textDecoration: "none"
-                                }}
-                            >
-                                Open Course Analyzer →
-                            </a>
+                            <CornerCTA href="/course" color="orange">
+                                Open Course Analyzer
+                            </CornerCTA>
                         </div>
                     )}
                 </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import { CornerCTA } from "@/components/FancyButtons";
 
 interface Semester {
     gpa: string;
@@ -176,20 +177,9 @@ export default function CollegeGPACalculator() {
                             <p style={{ color: "rgba(255,255,255,0.9)", marginBottom: "var(--space-4)" }}>
                                 To plan future semesters and track your GPA over time:
                             </p>
-                            <a
-                                href="/transcript"
-                                style={{
-                                    display: "inline-block",
-                                    background: "white",
-                                    color: "#0d9488",
-                                    padding: "var(--space-3) var(--space-6)",
-                                    borderRadius: "var(--radius-md)",
-                                    fontWeight: 600,
-                                    textDecoration: "none"
-                                }}
-                            >
-                                Open Transcript Workspace →
-                            </a>
+                            <CornerCTA href="/transcript">
+                                Open Transcript Workspace
+                            </CornerCTA>
                         </div>
                     )}
                 </div>

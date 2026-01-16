@@ -1,0 +1,636 @@
+/* ═══════════════════════════════════════════════════════════════
+   FANCY BUTTONS - Premium Effects
+   Deep reference to Uiverse.io designs
+   Adapted for GradePilot's teal/orange theme
+═══════════════════════════════════════════════════════════════ */
+
+/* ─────────────────────────────────────────────────────────────
+   1. SLIDE TOGGLE BUTTON (LinkedIn-style with corner clips)
+   Reference: Uiverse.io by Itskrish01
+───────────────────────────────────────────────────────────── */
+.slideToggle {
+    --active-color: #7c3aed;
+    --active-dark: #6d28d9;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    height: 44px;
+    font-size: 13px;
+    font-weight: 600;
+    color: white;
+    background: rgba(255, 255, 255, 0.08);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    cursor: pointer;
+    overflow: hidden;
+    transition: border-color 0.3s ease, transform 0.15s ease;
+}
+
+/* Corner decorations - top right */
+.slideToggle::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 16px;
+    height: 16px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 0 6px 0 0;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Corner decorations - bottom left */
+.slideToggle::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 16px;
+    height: 16px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 0 0 0 6px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.slideToggle:hover::before {
+    width: 0;
+    height: 0;
+    margin-right: -8px;
+    margin-top: -8px;
+}
+
+.slideToggle:hover::after {
+    width: 0;
+    height: 0;
+    margin-left: -8px;
+    margin-bottom: -8px;
+}
+
+.slideToggle:hover {
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.slideToggle:active {
+    transform: scale(0.96);
+}
+
+/* Slide fill background */
+.slideToggleBg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--active-color) 0%, var(--active-dark) 100%);
+    transform: translateX(-101%);
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.slideToggleActive .slideToggleBg {
+    transform: translateX(0);
+}
+
+.slideToggleActive {
+    border-color: var(--active-color);
+    box-shadow: 0 4px 20px rgba(124, 58, 237, 0.4);
+}
+
+.slideToggleActive::before,
+.slideToggleActive::after {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+.slideToggleIcon {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.slideToggle:hover .slideToggleIcon {
+    transform: scale(1.15) rotate(5deg);
+}
+
+.slideToggleActive .slideToggleIcon {
+    animation: iconPulse 0.6s ease;
+}
+
+@keyframes iconPulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.3);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.slideToggleText {
+    position: relative;
+    z-index: 1;
+    transition: transform 0.3s ease;
+}
+
+.slideToggle:hover .slideToggleText {
+    transform: translateX(2px);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   2. OUTLINE BUTTON (GitHub-style with slide fill)
+   Reference: Uiverse.io by kamehame-ha
+───────────────────────────────────────────────────────────── */
+.outlineBtn {
+    --active-color: #f97316;
+    --active-dark: #ea580c;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    height: 44px;
+    font-size: 13px;
+    font-weight: 600;
+    color: white;
+    background: transparent;
+    border: 2.5px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all 0.35s ease;
+    outline: 3px solid transparent;
+    outline-offset: -3px;
+}
+
+/* Slide fill on hover */
+.outlineBtn::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--active-color) 0%, var(--active-dark) 100%);
+    transform: translateX(-101%);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.outlineBtn:hover {
+    border-color: var(--active-color);
+    outline-color: rgba(249, 115, 22, 0.3);
+}
+
+.outlineBtn:hover::before {
+    transform: translateX(0);
+}
+
+.outlineBtnActive {
+    background: linear-gradient(135deg, var(--active-color) 0%, var(--active-dark) 100%);
+    border-color: var(--active-color);
+    box-shadow: 0 4px 20px rgba(249, 115, 22, 0.4);
+}
+
+.outlineBtnActive::before {
+    display: none;
+}
+
+.outlineBtnIcon {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.outlineBtn:hover .outlineBtnIcon {
+    transform: translateX(3px) scale(1.1);
+}
+
+.outlineBtnText {
+    position: relative;
+    z-index: 1;
+    transition: transform 0.3s ease, letter-spacing 0.3s ease;
+}
+
+.outlineBtn:hover .outlineBtnText {
+    letter-spacing: 0.5px;
+}
+
+.outlineBtn:active {
+    transform: scale(0.96);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   3. PROFILE BUTTON (Slide-up text effect)
+   Reference: Uiverse.io by Gaurav-WebDev
+───────────────────────────────────────────────────────────── */
+.profileBtn {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 18px;
+    height: 44px;
+    font-size: 14px;
+    font-weight: 600;
+    color: white;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1.5px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all 0.4s ease;
+}
+
+/* Hover background reveal */
+.profileBtn::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #2dd4bf 0%, #14b8a6 100%);
+    transform: translateY(100%);
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.profileBtn:hover::before {
+    transform: translateY(0);
+}
+
+.profileBtn:hover {
+    border-color: #2dd4bf;
+    box-shadow: 0 6px 20px rgba(45, 212, 191, 0.35);
+}
+
+.profileBtn:active {
+    transform: scale(0.97);
+}
+
+.profileBtnIcon {
+    position: relative;
+    z-index: 1;
+    width: 26px;
+    height: 26px;
+    background: #2dd4bf;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #0f172a;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 2px 8px rgba(45, 212, 191, 0.4);
+}
+
+.profileBtn:hover .profileBtnIcon {
+    transform: scale(1.15) rotate(-10deg);
+    box-shadow: 0 4px 16px rgba(45, 212, 191, 0.6);
+    background: white;
+    color: #14b8a6;
+}
+
+.profileBtnText {
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    height: 1.3em;
+}
+
+.profileBtnTextInner {
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.profileBtn:hover .profileBtnTextInner {
+    animation: textSlideUpDown 0.5s ease;
+}
+
+@keyframes textSlideUpDown {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    40% {
+        transform: translateY(-120%);
+        opacity: 0;
+    }
+
+    41% {
+        transform: translateY(120%);
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.profileBtnChevron {
+    position: relative;
+    z-index: 1;
+    transition: transform 0.3s ease;
+}
+
+.profileBtn:hover .profileBtnChevron {
+    transform: translateY(3px) rotate(180deg);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   4. CORNER CTA (Premium 3D button with shadow layers)
+   Reference: Uiverse.io by marcelodolza + Itskrish01
+───────────────────────────────────────────────────────────── */
+.cornerCta {
+    --cta-color: #0d9488;
+    --cta-dark: #0f766e;
+    --cta-light: #14b8a6;
+    --cta-shadow: rgba(13, 100, 90, 0.4);
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px 32px;
+    font-size: 17px;
+    font-weight: 700;
+    color: white;
+    background: transparent;
+    border-radius: 12px;
+    border: none;
+    text-decoration: none;
+    cursor: pointer;
+    outline: none;
+}
+
+/* 3D Shadow layers (marcelodolza style) */
+.cornerCta::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: var(--cta-dark);
+    filter: blur(1px);
+    transition: all 0.3s ease;
+    box-shadow:
+        -4px 4px 0 0 var(--cta-shadow),
+        -8px 8px 0 0 rgba(13, 100, 90, 0.3),
+        -12px 12px 4px 0 rgba(13, 100, 90, 0.2),
+        -16px 16px 8px 0 rgba(13, 100, 90, 0.15),
+        -20px 20px 12px 0 rgba(13, 100, 90, 0.1),
+        -24px 24px 16px 0 rgba(13, 100, 90, 0.05);
+}
+
+/* Main content wrapper with gradient border */
+.cornerCtaWrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 3px;
+    border-radius: inherit;
+    background: linear-gradient(to bottom,
+            var(--cta-light) 0%,
+            var(--cta-dark) 100%);
+    transform: translate(4px, -4px);
+    transition: transform 0.3s ease;
+}
+
+/* Inner content with bevel effect */
+.cornerCtaContent {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 14px 28px;
+    border-radius: calc(12px * 0.85);
+    background: linear-gradient(to bottom,
+            var(--cta-light) 0%,
+            var(--cta-color) 100%);
+    box-shadow:
+        inset -2px 10px 12px -5px rgba(255, 255, 255, 0.35),
+        inset 1px -3px 10px 0px rgba(0, 0, 0, 0.25);
+    transition: box-shadow 0.3s ease;
+}
+
+/* Text styling */
+.cornerCtaText {
+    position: relative;
+    z-index: 1;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    text-shadow: -1px 1px 2px var(--cta-dark);
+    transition: letter-spacing 0.3s ease;
+}
+
+/* Arrow icon */
+.cornerCtaArrow {
+    position: relative;
+    width: 20px;
+    height: 3px;
+    background: linear-gradient(to right, white, rgba(255, 255, 255, 0.8));
+    border-radius: 2px;
+    box-shadow: -1px 1px 3px var(--cta-dark);
+    transition: transform 0.3s ease;
+}
+
+.cornerCtaArrow::before,
+.cornerCtaArrow::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    width: 12px;
+    height: 3px;
+    background: white;
+    border-radius: 2px;
+    transform-origin: right center;
+}
+
+.cornerCtaArrow::before {
+    top: -1px;
+    transform: rotate(40deg);
+}
+
+.cornerCtaArrow::after {
+    bottom: -1px;
+    transform: rotate(-40deg);
+}
+
+/* Hover states */
+.cornerCta:hover .cornerCtaWrap {
+    transform: translate(6px, -6px);
+}
+
+.cornerCta:hover::before {
+    box-shadow:
+        -5px 5px 0 0 var(--cta-shadow),
+        -10px 10px 0 0 rgba(13, 100, 90, 0.3),
+        -15px 15px 6px 0 rgba(13, 100, 90, 0.22),
+        -20px 20px 10px 0 rgba(13, 100, 90, 0.16),
+        -25px 25px 14px 0 rgba(13, 100, 90, 0.1),
+        -30px 30px 18px 0 rgba(13, 100, 90, 0.06);
+}
+
+.cornerCta:hover .cornerCtaText {
+    letter-spacing: 0.5px;
+}
+
+.cornerCta:hover .cornerCtaArrow {
+    animation: arrowSwing 0.8s ease-in-out infinite;
+}
+
+@keyframes arrowSwing {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: translateX(4px);
+    }
+}
+
+/* Active/pressed state */
+.cornerCta:active .cornerCtaWrap {
+    transform: translate(2px, -2px);
+}
+
+.cornerCta:active::before {
+    box-shadow:
+        -3px 3px 0 0 var(--cta-shadow),
+        -6px 6px 0 0 rgba(13, 100, 90, 0.25),
+        -9px 9px 4px 0 rgba(13, 100, 90, 0.15);
+}
+
+.cornerCta:active .cornerCtaContent {
+    box-shadow:
+        inset -1px 8px 10px -5px rgba(0, 80, 70, 0.4),
+        inset 0px -2px 8px 0px rgba(255, 255, 255, 0.2);
+}
+
+/* Orange variant */
+.cornerCtaOrange {
+    --cta-color: #f97316;
+    --cta-dark: #ea580c;
+    --cta-light: #fb923c;
+    --cta-shadow: rgba(180, 80, 20, 0.4);
+}
+
+.cornerCtaOrange::before {
+    box-shadow:
+        -4px 4px 0 0 rgba(180, 80, 20, 0.4),
+        -8px 8px 0 0 rgba(180, 80, 20, 0.3),
+        -12px 12px 4px 0 rgba(180, 80, 20, 0.2),
+        -16px 16px 8px 0 rgba(180, 80, 20, 0.15),
+        -20px 20px 12px 0 rgba(180, 80, 20, 0.1),
+        -24px 24px 16px 0 rgba(180, 80, 20, 0.05);
+}
+
+.cornerCtaOrange:hover::before {
+    box-shadow:
+        -5px 5px 0 0 rgba(180, 80, 20, 0.4),
+        -10px 10px 0 0 rgba(180, 80, 20, 0.3),
+        -15px 15px 6px 0 rgba(180, 80, 20, 0.22),
+        -20px 20px 10px 0 rgba(180, 80, 20, 0.16),
+        -25px 25px 14px 0 rgba(180, 80, 20, 0.1),
+        -30px 30px 18px 0 rgba(180, 80, 20, 0.06);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   5. TAB TOGGLE (Smooth switch)
+───────────────────────────────────────────────────────────── */
+.tabToggle {
+    display: flex;
+    background: rgba(255, 255, 255, 0.08);
+    border: 2px solid rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    padding: 3px;
+    height: 44px;
+    position: relative;
+}
+
+.tabToggleBtn {
+    position: relative;
+    padding: 0 16px;
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.7);
+    background: transparent;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 1;
+}
+
+.tabToggleBtn:hover:not(.tabToggleBtnActive) {
+    color: white;
+}
+
+.tabToggleBtnActive {
+    color: #0d9488;
+    background: white;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+    transform: scale(1.02);
+}
+
+.tabToggleBtn:active {
+    transform: scale(0.97);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   6. SWITCH TOGGLE (Sliding bar style)
+   Reference: Uiverse.io by Praashoo7
+───────────────────────────────────────────────────────────── */
+.switchToggle {
+    font-size: 17px;
+    position: relative;
+    display: inline-block;
+    width: 3.5em;
+    height: 2em;
+}
+
+.switchToggle input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.switchSlider {
+    position: absolute;
+    cursor: pointer;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: inset 2px 5px 10px rgba(0, 0, 0, 0.3);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 5px;
+    border: 1.5px solid rgba(255, 255, 255, 0.2);
+}
+
+.switchSlider::before {
+    position: absolute;
+    content: "";
+    height: 1.4em;
+    width: 0.25em;
+    border-radius: 2px;
+    left: 0.3em;
+    bottom: 0.3em;
+    background: linear-gradient(180deg, white 0%, #e2e8f0 100%);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.switchToggle input:checked+.switchSlider {
+    background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+    box-shadow: inset 2px 5px 10px rgba(0, 0, 0, 0.4);
+    border-color: #a78bfa;
+}
+
+.switchToggle input:checked+.switchSlider::before {
+    transform: translateX(2.5em) rotate(360deg);
+    background: linear-gradient(180deg, #f5f3ff 0%, #ede9fe 100%);
+}
+
+.switchToggle:hover .switchSlider::before {
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+}

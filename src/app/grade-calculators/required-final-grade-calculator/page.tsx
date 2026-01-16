@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import { CornerCTA } from "@/components/FancyButtons";
 
 export default function RequiredFinalGradeCalculator() {
     const [currentGrade, setCurrentGrade] = useState("");
@@ -166,20 +167,9 @@ export default function RequiredFinalGradeCalculator() {
                             <p style={{ color: "rgba(255,255,255,0.9)", marginBottom: "var(--space-4)" }}>
                                 To see your full grade breakdown and plan every assignment:
                             </p>
-                            <a
-                                href="/course"
-                                style={{
-                                    display: "inline-block",
-                                    background: "white",
-                                    color: "#ea580c",
-                                    padding: "var(--space-3) var(--space-6)",
-                                    borderRadius: "var(--radius-md)",
-                                    fontWeight: 600,
-                                    textDecoration: "none"
-                                }}
-                            >
-                                Analyze Full Course →
-                            </a>
+                            <CornerCTA href="/course" color="orange">
+                                Analyze Full Course
+                            </CornerCTA>
                         </div>
                     )}
                 </div>

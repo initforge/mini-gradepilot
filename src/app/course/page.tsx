@@ -6,6 +6,7 @@ import { IconScale, IconTarget, IconChartPie, IconIdea, IconLink, IconUnlock, Ic
 import { DeleteButton, AddButton } from "@/components/AnimatedButtons";
 import WorkspaceNav from "@/components/WorkspaceNav";
 import ProfileSwitcher from "@/components/ProfileSwitcher";
+import { OutlineButton } from "@/components/FancyButtons";
 import { FAQSection, generateFAQSchema, RelatedTools, ExplanationBlock, ExampleBlock } from "@/components/SEOContent";
 
 // Course Analyzer FAQ Data
@@ -75,14 +76,14 @@ export default function CourseAnalyzer() {
         { id: "4", name: "Final Exam", weight: 40, score: null, maxScore: 100 },
     ]);
 
-    const { getActiveProfile, profiles, createProfile } = useAcademicStore();
+    const { getActiveProfile, profiles, createProfile, _hasHydrated } = useAcademicStore();
 
     useEffect(() => {
         setMounted(true);
-        if (profiles.length === 0) {
+        if (_hasHydrated && profiles.length === 0) {
             createProfile("My Profile");
         }
-    }, [profiles.length, createProfile]);
+    }, [_hasHydrated, profiles.length, createProfile]);
 
     if (!mounted) {
         return <div style={{ minHeight: "100vh", background: "#f8fafc" }} />;
@@ -174,31 +175,16 @@ export default function CourseAnalyzer() {
 
                         <div style={{ display: "flex", alignItems: "center", gap: "var(--space-3)" }}>
                             {/* Temp Mode Toggle */}
-                            <button
+                            <OutlineButton
+                                active={!tempMode}
                                 onClick={() => setTempMode(!tempMode)}
-                                style={{
-                                    background: tempMode ? "#8b5cf6" : "rgba(255,255,255,0.1)",
-                                    border: tempMode ? "2px solid #a78bfa" : "2px solid rgba(255,255,255,0.2)",
-                                    color: "white",
-                                    padding: "var(--space-2) var(--space-4)",
-                                    borderRadius: "var(--radius-md)",
-                                    fontWeight: 600,
-                                    cursor: "pointer",
-                                    transition: "all 0.15s ease",
-                                }}
-                            >
-                                {tempMode ? (
-                                    <>
-                                        <IconUnlock style={{ width: "18px", height: "18px" }} />
-                                        Temp Mode
-                                    </>
-                                ) : (
-                                    <>
-                                        <IconLink style={{ width: "18px", height: "18px" }} />
-                                        Linked Mode
-                                    </>
-                                )}
-                            </button>
+                                icon={tempMode
+                                    ? <IconUnlock style={{ width: 18, height: 18 }} />
+                                    : <IconLink style={{ width: 18, height: 18 }} />
+                                }
+                                label={tempMode ? "Temp Mode" : "Linked Mode"}
+                                activeColor="#f97316"
+                            />
 
                             <ProfileSwitcher />
                         </div>
