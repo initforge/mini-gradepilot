@@ -1,44 +1,22 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
-
-const STORAGE_KEY = "gradepilot_required_grade";
-
-interface SavedData {
-    currentGrade: number;
-    targetGrade: number;
-    finalWeight: number;
-}
+import { useState, useMemo } from "react";
 
 export default function RequiredFinalGradeCalculator() {
-    const [mounted, setMounted] = useState(false);
-    const [currentGrade, setCurrentGrade] = useState(75);
-    const [targetGrade, setTargetGrade] = useState(80);
-    const [finalWeight, setFinalWeight] = useState(30);
+    const [currentGrade, setCurrentGrade] = useState("");
+    const [targetGrade, setTargetGrade] = useState("");
+    const [finalWeight, setFinalWeight] = useState("");
 
-    useEffect(() => {
-        setMounted(true);
-        const saved = localStorage.getItem(STORAGE_KEY);
-        if (saved) {
-            try {
-                const parsed: SavedData = JSON.parse(saved);
-                setCurrentGrade(parsed.currentGrade ?? 75);
-                setTargetGrade(parsed.targetGrade ?? 80);
-                setFinalWeight(parsed.finalWeight ?? 30);
-            } catch { /* use defaults */ }
-        }
-    }, []);
+    const result = useMemo(() => {
+        const current = parseFloat(currentGrade);
+        const target = parseFloat(targetGrade);
+        const weight = parseFloat(finalWeight);
 
-    useEffect(() => {
-        if (mounted) {
-            localStorage.setItem(STORAGE_KEY, JSON.stringify({ currentGrade, targetGrade, finalWeight }));
-        }
-    }, [currentGrade, targetGrade, finalWeight, mounted]);
+        if (isNaN(current) || isNaN(target) || isNaN(weight) || weight <= 0) return null;
 
-    const calculations = useMemo(() => {
         // Formula: Required = (Target - Current * (1 - Weight/100)) / (Weight/100)
-        const currentWeight = 100 - finalWeight;
-        const requiredScore = (targetGrade - (currentGrade * currentWeight / 100)) / (finalWeight / 100);
+        const currentWeight = 100 - weight;
+        const requiredScore = (target - (current * currentWeight / 100)) / (weight / 100);
 
         // Difficulty assessment
         let difficulty: string;
@@ -54,18 +32,18 @@ export default function RequiredFinalGradeCalculator() {
             difficulty = "Challenging";
             status = "warning";
         } else {
-            difficulty = "Unrealistic";
+            difficulty = "Impossible";
             status = "danger";
         }
 
-        // What-if scenarios
-        const scenarios = [100, 95, 90, 85, 80, 75, 70].map((score) => {
-            const finalGrade = (currentGrade * currentWeight / 100) + (score * finalWeight / 100);
-            return { score, finalGrade: finalGrade.toFixed(1) };
-        });
-
-        return { requiredScore, difficulty, status, scenarios };
+        return { requiredScore, difficulty, status };
     }, [currentGrade, targetGrade, finalWeight]);
+
+    const resetAll = () => {
+        setCurrentGrade("");
+        setTargetGrade("");
+        setFinalWeight("");
+    };
 
     return (
         <div className="dashboard">
@@ -81,288 +59,207 @@ export default function RequiredFinalGradeCalculator() {
                 </div>
 
                 <div className="dashboard__workspace">
-                    {/* Inputs First (Exception) */}
-                    <div className="card card--elevated" style={{ padding: "var(--space-5)" }}>
-                        <h2 style={{ fontSize: "var(--text-lg)", marginBottom: "var(--space-4)" }}>Your Situation</h2>
+                    {/* Input Form */}
+                    <div className="card" style={{ padding: "var(--space-5)", marginBottom: "var(--space-6)" }}>
+                        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "var(--space-4)" }}>
+                            <h2 style={{ margin: 0 }}>Your Situation</h2>
+                            <button
+                                onClick={resetAll}
+                                style={{ background: "none", border: "none", color: "var(--color-text-muted)", cursor: "pointer", fontSize: "var(--text-sm)" }}
+                            >
+                                Reset
+                            </button>
+                        </div>
+
                         <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "var(--space-4)" }}>
-                            <div className="input-group">
-                                <label className="input-group__label">Current Grade (%)</label>
+                            <div>
+                                <label style={{ display: "block", fontSize: "var(--text-sm)", color: "var(--color-text-muted)", marginBottom: "var(--space-2)" }}>
+                                    Current Grade (%)
+                                </label>
                                 <input
                                     type="number"
                                     className="input"
-                                    min={0}
-                                    max={100}
+                                    placeholder="e.g. 78"
                                     value={currentGrade}
-                                    onChange={(e) => setCurrentGrade(parseFloat(e.target.value) || 0)}
+                                    onChange={(e) => setCurrentGrade(e.target.value)}
+                                    min="0"
+                                    max="100"
+                                    style={{ padding: "var(--space-3)", fontSize: "var(--text-lg)", textAlign: "center" }}
                                 />
                             </div>
-                            <div className="input-group">
-                                <label className="input-group__label">Target Grade (%)</label>
+                            <div>
+                                <label style={{ display: "block", fontSize: "var(--text-sm)", color: "var(--color-text-muted)", marginBottom: "var(--space-2)" }}>
+                                    Target Grade (%)
+                                </label>
                                 <input
                                     type="number"
                                     className="input"
-                                    min={0}
-                                    max={100}
+                                    placeholder="e.g. 83"
                                     value={targetGrade}
-                                    onChange={(e) => setTargetGrade(parseFloat(e.target.value) || 0)}
+                                    onChange={(e) => setTargetGrade(e.target.value)}
+                                    min="0"
+                                    max="100"
+                                    style={{ padding: "var(--space-3)", fontSize: "var(--text-lg)", textAlign: "center" }}
                                 />
                             </div>
-                            <div className="input-group">
-                                <label className="input-group__label">Final Exam Weight (%)</label>
+                            <div>
+                                <label style={{ display: "block", fontSize: "var(--text-sm)", color: "var(--color-text-muted)", marginBottom: "var(--space-2)" }}>
+                                    Final Exam Weight (%)
+                                </label>
                                 <input
                                     type="number"
                                     className="input"
-                                    min={1}
-                                    max={100}
+                                    placeholder="e.g. 30"
                                     value={finalWeight}
-                                    onChange={(e) => setFinalWeight(parseFloat(e.target.value) || 1)}
+                                    onChange={(e) => setFinalWeight(e.target.value)}
+                                    min="1"
+                                    max="100"
+                                    style={{ padding: "var(--space-3)", fontSize: "var(--text-lg)", textAlign: "center" }}
                                 />
                             </div>
                         </div>
                     </div>
 
-                    {/* Required Score Snapshot */}
-                    <div className={`gpa-snapshot gpa-snapshot--${calculations.status}`}>
-                        <div className="gpa-snapshot__number">
-                            {mounted ? (calculations.requiredScore > 0 ? calculations.requiredScore.toFixed(1) : "0") : "0"}%
-                        </div>
-                        <div className="gpa-snapshot__label">Required Score on Final</div>
-                        <div className="gpa-snapshot__badge">{calculations.difficulty}</div>
-                        {calculations.requiredScore > 100 && (
-                            <div className="gpa-snapshot__insight">
-                                ⚠️ You need more than 100% — consider adjusting your target grade
+                    {/* Result */}
+                    {result ? (
+                        <div className={`gpa-snapshot gpa-snapshot--${result.status}`}>
+                            <div className="gpa-snapshot__number">
+                                {result.requiredScore > 100 ? ">100" : result.requiredScore < 0 ? "0" : result.requiredScore.toFixed(1)}%
                             </div>
-                        )}
-                        {calculations.requiredScore < 0 && (
-                            <div className="gpa-snapshot__insight">
-                                🎉 You've already achieved your target! Any score will maintain it.
+                            <div className="gpa-snapshot__label">Required on Final</div>
+                            <div className="gpa-snapshot__badge">
+                                {result.difficulty}
                             </div>
-                        )}
-                    </div>
-
-                    {/* What-If Scenarios */}
-                    <div className="impact-section">
-                        <h2 className="impact-section__title">What-If Scenarios</h2>
-                        <p style={{ fontSize: "var(--text-sm)", color: "var(--color-text-muted)", marginBottom: "var(--space-4)" }}>
-                            See your final grade for different exam scores
-                        </p>
-                        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(120px, 1fr))", gap: "var(--space-3)" }}>
-                            {calculations.scenarios.map((scenario) => {
-                                const isTarget = parseFloat(scenario.finalGrade) >= targetGrade;
-                                return (
-                                    <div
-                                        key={scenario.score}
-                                        className="card card--elevated"
-                                        style={{
-                                            textAlign: "center",
-                                            padding: "var(--space-4)",
-                                            borderColor: isTarget ? "var(--color-success)" : undefined,
-                                            background: isTarget ? "var(--color-success-bg)" : undefined,
-                                        }}
-                                    >
-                                        <div style={{ fontSize: "var(--text-sm)", color: "var(--color-text-muted)" }}>
-                                            If you score
-                                        </div>
-                                        <div style={{ fontSize: "var(--text-2xl)", fontWeight: 700 }}>
-                                            {scenario.score}%
-                                        </div>
-                                        <div style={{ fontSize: "var(--text-xs)", color: "var(--color-text-muted)", marginTop: "var(--space-1)" }}>
-                                            Final: {scenario.finalGrade}%
-                                        </div>
-                                        {isTarget && (
-                                            <div style={{ fontSize: "var(--text-xs)", color: "var(--color-success)", marginTop: "var(--space-1)" }}>
-                                                ✓ Meets target
-                                            </div>
-                                        )}
-                                    </div>
-                                );
-                            })}
+                            {result.requiredScore > 100 && (
+                                <p style={{ marginTop: "var(--space-3)", fontSize: "var(--text-sm)", opacity: 0.9 }}>
+                                    Even a perfect 100% won&apos;t be enough to reach your target.
+                                </p>
+                            )}
                         </div>
-                    </div>
+                    ) : (
+                        <div
+                            style={{
+                                padding: "var(--space-8)",
+                                textAlign: "center",
+                                background: "var(--color-bg-secondary)",
+                                borderRadius: "var(--radius-lg)"
+                            }}
+                        >
+                            <p style={{ color: "var(--color-text-muted)", margin: 0 }}>
+                                Enter your grades above to see what you need on the final
+                            </p>
+                        </div>
+                    )}
 
-                    {/* Visual Breakdown */}
-                    <div className="card" style={{ padding: "var(--space-4)" }}>
-                        <h3 style={{ fontSize: "var(--text-base)", marginBottom: "var(--space-3)" }}>Grade Composition</h3>
-                        <div style={{ display: "flex", height: 24, borderRadius: "var(--radius-md)", overflow: "hidden" }}>
-                            <div
+                    {/* CTA */}
+                    {result && (
+                        <div style={{
+                            marginTop: "var(--space-6)",
+                            padding: "var(--space-5)",
+                            background: "linear-gradient(135deg, #f97316 0%, #ea580c 100%)",
+                            borderRadius: "var(--radius-lg)",
+                            textAlign: "center"
+                        }}>
+                            <p style={{ color: "white", marginBottom: "var(--space-3)", fontSize: "var(--text-lg)" }}>
+                                <strong>This considers only your final exam.</strong>
+                            </p>
+                            <p style={{ color: "rgba(255,255,255,0.9)", marginBottom: "var(--space-4)" }}>
+                                To see your full grade breakdown and plan every assignment:
+                            </p>
+                            <a
+                                href="/course"
                                 style={{
-                                    width: `${100 - finalWeight}%`,
-                                    background: "var(--color-primary)",
-                                    display: "flex",
-                                    alignItems: "center",
-                                    justifyContent: "center",
-                                    color: "white",
-                                    fontSize: "var(--text-xs)",
+                                    display: "inline-block",
+                                    background: "white",
+                                    color: "#ea580c",
+                                    padding: "var(--space-3) var(--space-6)",
+                                    borderRadius: "var(--radius-md)",
                                     fontWeight: 600,
+                                    textDecoration: "none"
                                 }}
                             >
-                                Current: {currentGrade}%
-                            </div>
-                            <div
-                                style={{
-                                    width: `${finalWeight}%`,
-                                    background: "var(--color-secondary)",
-                                    display: "flex",
-                                    alignItems: "center",
-                                    justifyContent: "center",
-                                    color: "white",
-                                    fontSize: "var(--text-xs)",
-                                    fontWeight: 600,
-                                }}
-                            >
-                                Final: {finalWeight}%
-                            </div>
+                                Analyze Full Course →
+                            </a>
                         </div>
-                    </div>
+                    )}
                 </div>
 
-                <details className="explanation-section">
-                    <summary>How It&apos;s Calculated</summary>
-                    <div className="explanation-section__content">
-                        <p>The required score formula is:</p>
-                        <p style={{ fontFamily: "monospace", background: "var(--color-bg-secondary)", padding: "var(--space-2)", borderRadius: "var(--radius-sm)", marginTop: "var(--space-2)" }}>
-                            Required = (Target - Current × (1 - Final Weight)) ÷ Final Weight
-                        </p>
-                        <p style={{ marginTop: "var(--space-3)" }}>
-                            Example: If your current grade is 75%, target is 80%, and final is 30%:
-                            Required = (80 - 75 × 0.7) ÷ 0.3 = (80 - 52.5) ÷ 0.3 = 91.7%
-                        </p>
-                    </div>
-                </details>
-
-                {/* Deep SEO Content */}
+                {/* SEO Content */}
                 <section className="seo-content">
-                    <h2>What Grade Do I Need on My Final?</h2>
+                    <h2>How to Calculate Required Final Exam Score</h2>
                     <p>
-                        This is one of the most common questions students ask, especially as finals week approaches.
-                        The answer depends on three factors: your current grade in the class, your target grade, and how much the final exam is worth.
-                    </p>
-                    <p>
-                        Our calculator uses the weighted average formula to determine exactly what score you need on your final exam
-                        to achieve your desired grade. It also shows you what-if scenarios so you can see how different exam scores
-                        would affect your final grade.
+                        This calculator uses a simple formula to determine what score you need on your final exam
+                        to achieve your desired course grade.
                     </p>
 
-                    <h3>Worked Example: What Score Do I Need to Get a B?</h3>
-                    <p>Let&apos;s say you have these grades going into finals:</p>
+                    <h3>The Formula</h3>
+                    <p>
+                        <strong>Required Score = (Target Grade - Current Grade × (1 - Final Weight)) ÷ Final Weight</strong>
+                    </p>
+
+                    <h3>Worked Example</h3>
+                    <p>You have:</p>
                     <ul style={{ marginLeft: "var(--space-6)", marginBottom: "var(--space-4)" }}>
-                        <li><strong>Current Grade:</strong> 78% (C+)</li>
-                        <li><strong>Target Grade:</strong> 80% (B-)</li>
-                        <li><strong>Final Exam Weight:</strong> 25%</li>
+                        <li>Current grade: <strong>78%</strong></li>
+                        <li>Target grade: <strong>83% (B)</strong></li>
+                        <li>Final exam weight: <strong>30%</strong></li>
                     </ul>
-                    <p>Using the formula:</p>
-                    <div style={{ fontFamily: "monospace", background: "var(--color-bg)", padding: "var(--space-3)", borderRadius: "var(--radius-md)", marginBottom: "var(--space-4)" }}>
-                        Required = (80 - 78 × 0.75) ÷ 0.25<br />
-                        Required = (80 - 58.5) ÷ 0.25<br />
-                        Required = 21.5 ÷ 0.25<br />
-                        Required = <strong>86%</strong>
-                    </div>
                     <p>
-                        You need an <strong>86%</strong> on your final to raise your grade from a C+ to a B-.
-                        That&apos;s challenging but achievable with focused studying.
+                        Required = (83 - 78 × 0.70) ÷ 0.30<br />
+                        Required = (83 - 54.6) ÷ 0.30<br />
+                        Required = 28.4 ÷ 0.30<br />
+                        Required = <strong>94.7%</strong>
+                    </p>
+                    <p>
+                        You need a 95% on your final to get a B in the class.
                     </p>
 
-                    <h3>Letter Grade Thresholds</h3>
-                    <p>Here&apos;s the standard US grading scale for reference:</p>
-                    <div className="seo-content__table-wrapper">
-                        <table className="seo-content__table">
-                            <thead>
-                                <tr>
-                                    <th>Letter Grade</th>
-                                    <th>Percentage</th>
-                                    <th>GPA Points</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr><td>A</td><td>93-100%</td><td>4.0</td></tr>
-                                <tr><td>A-</td><td>90-92%</td><td>3.7</td></tr>
-                                <tr><td>B+</td><td>87-89%</td><td>3.3</td></tr>
-                                <tr><td>B</td><td>83-86%</td><td>3.0</td></tr>
-                                <tr><td>B-</td><td>80-82%</td><td>2.7</td></tr>
-                                <tr><td>C+</td><td>77-79%</td><td>2.3</td></tr>
-                                <tr><td>C</td><td>73-76%</td><td>2.0</td></tr>
-                                <tr><td>C-</td><td>70-72%</td><td>1.7</td></tr>
-                                <tr><td>D</td><td>60-69%</td><td>1.0</td></tr>
-                                <tr><td>F</td><td>Below 60%</td><td>0.0</td></tr>
-                            </tbody>
-                        </table>
-                    </div>
+                    <h3>What If It&apos;s Over 100%?</h3>
+                    <p>
+                        If the calculator shows you need more than 100%, your target grade isn&apos;t mathematically achievable
+                        with your final exam alone. Consider:
+                    </p>
+                    <ul style={{ marginLeft: "var(--space-6)", marginBottom: "var(--space-4)" }}>
+                        <li>Checking if extra credit is available</li>
+                        <li>Asking about grade replacement policies</li>
+                        <li>Setting a more realistic target grade</li>
+                    </ul>
 
-                    <h3>Realistic Expectations Based on Required Score</h3>
+                    <h3>Difficulty Ratings Explained</h3>
                     <div className="seo-content__scenarios">
                         <div className="seo-content__scenario">
-                            <h4>🟢 Under 70% required</h4>
-                            <p>
-                                Very achievable. You can likely pass with minimal additional studying.
-                                Focus on avoiding careless mistakes.
-                            </p>
+                            <h4>✅ Very Achievable (≤60%)</h4>
+                            <p>You&apos;re in great shape. Even a below-average performance will get you there.</p>
                         </div>
                         <div className="seo-content__scenario">
-                            <h4>🟡 70-85% required</h4>
-                            <p>
-                                Achievable with good preparation. Make a study plan,
-                                review past exams, and get enough sleep before the test.
-                            </p>
+                            <h4>🟢 Achievable (61-80%)</h4>
+                            <p>Solid studying should get you there. A B-level performance on the final.</p>
                         </div>
                         <div className="seo-content__scenario">
-                            <h4>🟠 85-95% required</h4>
-                            <p>
-                                Challenging. You&apos;ll need to know the material well.
-                                Consider forming a study group or getting tutoring.
-                            </p>
+                            <h4>🟡 Challenging (81-100%)</h4>
+                            <p>You need an excellent performance. Time for serious studying.</p>
                         </div>
                         <div className="seo-content__scenario">
-                            <h4>🔴 Over 95% required</h4>
-                            <p>
-                                Very difficult. Consider whether this target is realistic.
-                                A slightly lower grade might be more achievable with less stress.
-                            </p>
+                            <h4>🔴 Impossible (&gt;100%)</h4>
+                            <p>Mathematically not possible. Consider adjusting your target.</p>
                         </div>
                     </div>
-
-                    <h3>Tips for Hitting Your Target Score</h3>
-                    <ul style={{ marginLeft: "var(--space-6)", marginBottom: "var(--space-4)" }}>
-                        <li><strong>Know the format:</strong> Multiple choice? Essays? Problems? Prepare accordingly.</li>
-                        <li><strong>Review past exams:</strong> Professors often reuse question styles.</li>
-                        <li><strong>Focus on weak areas:</strong> Don&apos;t just study what you already know.</li>
-                        <li><strong>Get sleep:</strong> All-nighters usually hurt more than they help.</li>
-                        <li><strong>Start early:</strong> Cramming is less effective than spaced repetition.</li>
-                    </ul>
-
-                    <h3>What If I Need Over 100%?</h3>
-                    <p>
-                        If the calculator shows you need more than 100%, you mathematically cannot reach your target grade on this exam alone.
-                        Your options:
-                    </p>
-                    <ul style={{ marginLeft: "var(--space-6)", marginBottom: "var(--space-4)" }}>
-                        <li>Check if there&apos;s extra credit available</li>
-                        <li>Ask about retaking or dropping the lowest grade</li>
-                        <li>Accept a slightly lower final grade (it&apos;s not the end of the world)</li>
-                        <li>Talk to your professor about your situation</li>
-                    </ul>
-
-                    <h3>Next Steps</h3>
-                    <p>
-                        After determining your required score, use our <a href="/course">Course Grade Analyzer</a> to break down
-                        all your assignment categories and see exactly where your grade stands.
-                        Or check your overall <a href="/gpa">GPA Workspace</a> to see how this course affects your cumulative GPA.
-                    </p>
                 </section>
 
                 {/* Related Tools */}
                 <section style={{ marginTop: "var(--space-8)" }}>
-                    <h3 style={{ marginBottom: "var(--space-4)" }}>Related Tools</h3>
+                    <h3 style={{ marginBottom: "var(--space-4)" }}>Related Calculators</h3>
                     <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "var(--space-4)" }}>
                         <a href="/grade-calculators/final-grade-calculator" className="card card--hover" style={{ padding: "var(--space-4)", textDecoration: "none" }}>
                             <strong style={{ color: "var(--color-text)" }}>Final Grade Calculator</strong>
                             <p style={{ fontSize: "var(--text-sm)", color: "var(--color-text-muted)", marginTop: "var(--space-1)" }}>
-                                Calculate your current weighted average
+                                Calculate your overall course grade
                             </p>
                         </a>
                         <a href="/course" className="card card--hover" style={{ padding: "var(--space-4)", textDecoration: "none" }}>
-                            <strong style={{ color: "var(--color-text)" }}>Course Grade Analyzer</strong>
+                            <strong style={{ color: "var(--color-text)" }}>Course Analyzer</strong>
                             <p style={{ fontSize: "var(--text-sm)", color: "var(--color-text-muted)", marginTop: "var(--space-1)" }}>
-                                Full breakdown of your course grade
+                                Deep dive into your full course
                             </p>
                         </a>
                     </div>

@@ -1,38 +1,20 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
-import dynamic from "next/dynamic";
-import RelatedTools from "@/components/RelatedTools";
-
-const PieChart = dynamic(() => import("recharts").then((mod) => mod.PieChart), { ssr: false });
-const Pie = dynamic(() => import("recharts").then((mod) => mod.Pie), { ssr: false });
-const Cell = dynamic(() => import("recharts").then((mod) => mod.Cell), { ssr: false });
-const ResponsiveContainer = dynamic(() => import("recharts").then((mod) => mod.ResponsiveContainer), { ssr: false });
-const Tooltip = dynamic(() => import("recharts").then((mod) => mod.Tooltip), { ssr: false });
+import { useState, useMemo } from "react";
 
 interface Category {
-    id: string;
     name: string;
-    weight: number;
-    score: number;
+    weight: string;
+    score: string;
 }
 
-const STORAGE_KEY = "gradepilot_final_grade";
-
-const COLORS = ["#2563eb", "#7c3aed", "#059669", "#f59e0b", "#ef4444", "#ec4899"];
-
-function generateId() {
-    return Math.random().toString(36).substring(2, 9);
-}
-
-function getDefaultCategories(): Category[] {
-    return [
-        { id: generateId(), name: "Homework", weight: 20, score: 0 },
-        { id: generateId(), name: "Quizzes", weight: 20, score: 0 },
-        { id: generateId(), name: "Midterm", weight: 25, score: 0 },
-        { id: generateId(), name: "Final Exam", weight: 35, score: 0 },
-    ];
-}
+// 4 fixed category slots
+const INITIAL_CATEGORIES: Category[] = [
+    { name: "Homework", weight: "20", score: "" },
+    { name: "Quizzes", weight: "20", score: "" },
+    { name: "Midterm", weight: "25", score: "" },
+    { name: "Final Exam", weight: "35", score: "" },
+];
 
 function getLetterGrade(percentage: number): string {
     if (percentage >= 93) return "A";
@@ -50,48 +32,31 @@ function getLetterGrade(percentage: number): string {
 }
 
 export default function FinalGradeCalculator() {
-    const [mounted, setMounted] = useState(false);
-    const [categories, setCategories] = useState<Category[]>(getDefaultCategories);
+    const [categories, setCategories] = useState<Category[]>(INITIAL_CATEGORIES);
 
-    useEffect(() => {
-        setMounted(true);
-        const saved = localStorage.getItem(STORAGE_KEY);
-        if (saved) {
-            try {
-                const parsed = JSON.parse(saved);
-                if (Array.isArray(parsed) && parsed.length > 0) setCategories(parsed);
-            } catch { /* use defaults */ }
-        }
-    }, []);
+    const result = useMemo(() => {
+        const validCategories = categories.filter(
+            (c) => c.weight !== "" && c.score !== "" && parseFloat(c.weight) > 0
+        );
+        if (validCategories.length === 0) return null;
 
-    useEffect(() => {
-        if (mounted) localStorage.setItem(STORAGE_KEY, JSON.stringify(categories));
-    }, [categories, mounted]);
-
-    const calculations = useMemo(() => {
-        const totalWeight = categories.reduce((sum, c) => sum + c.weight, 0);
+        let totalWeight = 0;
         let weightedScore = 0;
 
-        categories.forEach((cat) => {
-            weightedScore += (cat.score * cat.weight) / 100;
+        validCategories.forEach((cat) => {
+            const weight = parseFloat(cat.weight);
+            const score = parseFloat(cat.score);
+            if (!isNaN(weight) && !isNaN(score)) {
+                totalWeight += weight;
+                weightedScore += (score * weight) / 100;
+            }
         });
 
         const percentage = totalWeight > 0 ? (weightedScore / totalWeight) * 100 : 0;
         const letterGrade = getLetterGrade(percentage);
 
-        // Find highest leverage category (highest weight, lowest score relative to potential)
-        const highestLeverage = categories
-            .filter((c) => c.score < 100)
-            .sort((a, b) => b.weight - a.weight)[0];
-
-        return { percentage, letterGrade, totalWeight, highestLeverage };
+        return { percentage, letterGrade, totalWeight };
     }, [categories]);
-
-    const chartData = categories.map((cat, idx) => ({
-        name: cat.name,
-        value: cat.weight,
-        color: COLORS[idx % COLORS.length],
-    }));
 
     const getGradeStatus = (letter: string) => {
         if (["A", "A-"].includes(letter)) return "excellent";
@@ -100,21 +65,13 @@ export default function FinalGradeCalculator() {
         return "danger";
     };
 
-    const status = getGradeStatus(calculations.letterGrade);
-
-    const updateCategory = (id: string, field: keyof Category, value: string | number) => {
+    const updateCategory = (index: number, field: keyof Category, value: string) => {
         setCategories((prev) =>
-            prev.map((c) => (c.id === id ? { ...c, [field]: value } : c))
+            prev.map((c, i) => (i === index ? { ...c, [field]: value } : c))
         );
     };
 
-    const addCategory = () => {
-        setCategories((prev) => [...prev, { id: generateId(), name: "", weight: 10, score: 0 }]);
-    };
-
-    const removeCategory = (id: string) => {
-        setCategories((prev) => prev.filter((c) => c.id !== id));
-    };
+    const resetAll = () => setCategories(INITIAL_CATEGORIES);
 
     return (
         <div className="dashboard">
@@ -125,276 +82,240 @@ export default function FinalGradeCalculator() {
                     </nav>
                     <h1 className="dashboard__title">Final Grade Calculator</h1>
                     <p className="dashboard__subtitle">
-                        Calculate your weighted course average based on category weights
+                        Calculate your weighted course grade based on category scores
                     </p>
                 </div>
 
                 <div className="dashboard__workspace">
-                    {/* Dual Snapshot */}
-                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--space-4)" }}>
-                        <div className={`gpa-snapshot gpa-snapshot--${status}`} style={{ padding: "var(--space-5)" }}>
-                            <div className="gpa-snapshot__number" style={{ fontSize: "var(--text-5xl)" }}>
-                                {mounted ? calculations.percentage.toFixed(1) : "0.0"}%
-                            </div>
-                            <div className="gpa-snapshot__label">Current Grade</div>
-                            {calculations.highestLeverage && (
-                                <div className="gpa-snapshot__insight">
-                                    {calculations.highestLeverage.name} ({calculations.highestLeverage.weight}%) has the most impact
-                                </div>
-                            )}
-                        </div>
-                        <div className="card card--elevated" style={{ textAlign: "center", padding: "var(--space-5)", display: "flex", flexDirection: "column", justifyContent: "center" }}>
-                            <div style={{ fontSize: "var(--text-6xl)", fontWeight: 800, color: "var(--color-primary)" }}>
-                                {calculations.letterGrade}
-                            </div>
-                            <div style={{ fontSize: "var(--text-sm)", color: "var(--color-text-muted)", marginTop: "var(--space-1)" }}>
-                                Letter Grade
-                            </div>
-                            {calculations.totalWeight !== 100 && (
-                                <div style={{ fontSize: "var(--text-xs)", color: "var(--color-warning)", marginTop: "var(--space-2)" }}>
-                                    ⚠️ Weights total {calculations.totalWeight}% (should be 100%)
-                                </div>
-                            )}
-                        </div>
-                    </div>
-
-                    {/* Weight Distribution Chart */}
-                    {mounted && (
-                        <div className="impact-section">
-                            <h2 className="impact-section__title">Weight Distribution</h2>
-                            <div style={{ display: "grid", gridTemplateColumns: "200px 1fr", gap: "var(--space-4)", alignItems: "center" }}>
-                                <ResponsiveContainer width="100%" height={180}>
-                                    <PieChart>
-                                        <Pie
-                                            data={chartData}
-                                            dataKey="value"
-                                            nameKey="name"
-                                            cx="50%"
-                                            cy="50%"
-                                            innerRadius={40}
-                                            outerRadius={80}
-                                        >
-                                            {chartData.map((entry, idx) => (
-                                                <Cell key={idx} fill={entry.color} />
-                                            ))}
-                                        </Pie>
-                                        <Tooltip formatter={(v) => [`${v}%`, "Weight"]} />
-                                    </PieChart>
-                                </ResponsiveContainer>
-                                <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-2)" }}>
-                                    {categories.map((cat, idx) => (
-                                        <div key={cat.id} style={{ display: "flex", alignItems: "center", gap: "var(--space-2)", fontSize: "var(--text-sm)" }}>
-                                            <span style={{ width: 12, height: 12, borderRadius: 2, background: COLORS[idx % COLORS.length] }}></span>
-                                            <span style={{ flex: 1 }}>{cat.name || `Category ${idx + 1}`}</span>
-                                            <span style={{ color: "var(--color-text-muted)" }}>{cat.weight}%</span>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        </div>
-                    )}
-
-                    {/* Categories Input */}
-                    <div className="course-list">
-                        <div className="course-list__header">
-                            <h2 className="course-list__title">Grade Categories</h2>
-                            <div className="course-list__actions">
-                                <button onClick={addCategory} className="btn btn--primary btn--sm">+ Add</button>
-                            </div>
+                    {/* Input Form */}
+                    <div className="card" style={{ padding: "var(--space-5)", marginBottom: "var(--space-6)" }}>
+                        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "var(--space-4)" }}>
+                            <h2 style={{ margin: 0 }}>Grade Categories</h2>
+                            <button
+                                onClick={resetAll}
+                                style={{ background: "none", border: "none", color: "var(--color-text-muted)", cursor: "pointer", fontSize: "var(--text-sm)" }}
+                            >
+                                Reset
+                            </button>
                         </div>
 
-                        <div className="course-list__grid">
-                            {categories.map((cat, idx) => (
-                                <div key={cat.id} className="course-card">
-                                    <div className="course-card__indicator" style={{ background: COLORS[idx % COLORS.length] }}></div>
-                                    <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr", gap: "var(--space-2)", alignItems: "center" }}>
-                                        <input
-                                            type="text"
-                                            className="input"
-                                            placeholder={`Category ${idx + 1}`}
-                                            value={cat.name}
-                                            onChange={(e) => updateCategory(cat.id, "name", e.target.value)}
-                                        />
-                                        <div className="input-group">
-                                            <label className="input-group__label">Weight %</label>
-                                            <input
-                                                type="number"
-                                                className="input"
-                                                min={0}
-                                                max={100}
-                                                value={cat.weight}
-                                                onChange={(e) => updateCategory(cat.id, "weight", parseInt(e.target.value) || 0)}
-                                            />
-                                        </div>
-                                        <div className="input-group">
-                                            <label className="input-group__label">Score %</label>
-                                            <input
-                                                type="number"
-                                                className="input"
-                                                min={0}
-                                                max={100}
-                                                value={cat.score}
-                                                onChange={(e) => updateCategory(cat.id, "score", parseFloat(e.target.value) || 0)}
-                                            />
-                                        </div>
-                                    </div>
-                                    <button onClick={() => removeCategory(cat.id)} className="course-card__delete">✕</button>
+                        <div style={{ display: "grid", gap: "var(--space-3)" }}>
+                            {categories.map((cat, index) => (
+                                <div
+                                    key={index}
+                                    style={{
+                                        display: "grid",
+                                        gridTemplateColumns: "1fr 80px 80px",
+                                        gap: "var(--space-3)",
+                                        alignItems: "center"
+                                    }}
+                                >
+                                    <input
+                                        type="text"
+                                        className="input"
+                                        value={cat.name}
+                                        onChange={(e) => updateCategory(index, "name", e.target.value)}
+                                        placeholder="Category name"
+                                        style={{ padding: "var(--space-2)" }}
+                                    />
+                                    <input
+                                        type="number"
+                                        className="input"
+                                        value={cat.weight}
+                                        onChange={(e) => updateCategory(index, "weight", e.target.value)}
+                                        placeholder="Weight"
+                                        min="0"
+                                        max="100"
+                                        style={{ padding: "var(--space-2)", textAlign: "center" }}
+                                    />
+                                    <input
+                                        type="number"
+                                        className="input"
+                                        value={cat.score}
+                                        onChange={(e) => updateCategory(index, "score", e.target.value)}
+                                        placeholder="Score"
+                                        min="0"
+                                        max="100"
+                                        style={{ padding: "var(--space-2)", textAlign: "center" }}
+                                    />
                                 </div>
                             ))}
                         </div>
+                        <div style={{ display: "flex", justifyContent: "space-between", fontSize: "var(--text-sm)", color: "var(--color-text-muted)", marginTop: "var(--space-2)" }}>
+                            <span></span>
+                            <span>Weight (%)</span>
+                            <span>Score (%)</span>
+                        </div>
+
+                        <p style={{ fontSize: "var(--text-sm)", color: "var(--color-text-muted)", marginTop: "var(--space-4)" }}>
+                            Enter your category weights and scores. Empty rows are ignored.
+                        </p>
                     </div>
+
+                    {/* Result */}
+                    {result ? (
+                        <div className={`gpa-snapshot gpa-snapshot--${getGradeStatus(result.letterGrade)}`}>
+                            <div className="gpa-snapshot__number">
+                                {result.percentage.toFixed(1)}%
+                            </div>
+                            <div className="gpa-snapshot__label">Final Grade</div>
+                            <div className="gpa-snapshot__badge">
+                                {result.letterGrade}
+                            </div>
+                            <div className="gpa-snapshot__meta">
+                                <div className="gpa-snapshot__meta-item">
+                                    <span className="gpa-snapshot__meta-value">{result.totalWeight}%</span>
+                                    <span>Weight Used</span>
+                                </div>
+                            </div>
+                        </div>
+                    ) : (
+                        <div
+                            style={{
+                                padding: "var(--space-8)",
+                                textAlign: "center",
+                                background: "var(--color-bg-secondary)",
+                                borderRadius: "var(--radius-lg)"
+                            }}
+                        >
+                            <p style={{ color: "var(--color-text-muted)", margin: 0 }}>
+                                Enter scores above to calculate your final grade
+                            </p>
+                        </div>
+                    )}
+
+                    {/* CTA */}
+                    {result && (
+                        <div style={{
+                            marginTop: "var(--space-6)",
+                            padding: "var(--space-5)",
+                            background: "linear-gradient(135deg, #f97316 0%, #ea580c 100%)",
+                            borderRadius: "var(--radius-lg)",
+                            textAlign: "center"
+                        }}>
+                            <p style={{ color: "white", marginBottom: "var(--space-3)", fontSize: "var(--text-lg)" }}>
+                                <strong>This shows where you stand now.</strong>
+                            </p>
+                            <p style={{ color: "rgba(255,255,255,0.9)", marginBottom: "var(--space-4)" }}>
+                                To see how individual assignments affect your grade and plan improvements:
+                            </p>
+                            <a
+                                href="/course"
+                                style={{
+                                    display: "inline-block",
+                                    background: "white",
+                                    color: "#ea580c",
+                                    padding: "var(--space-3) var(--space-6)",
+                                    borderRadius: "var(--radius-md)",
+                                    fontWeight: 600,
+                                    textDecoration: "none"
+                                }}
+                            >
+                                Open Course Analyzer →
+                            </a>
+                        </div>
+                    )}
                 </div>
 
-                <details className="explanation-section">
-                    <summary>How Final Grades are Calculated</summary>
-                    <div className="explanation-section__content">
-                        <p>Your final grade is calculated using weighted averages:</p>
-                        <p style={{ marginTop: "var(--space-2)" }}>
-                            <strong>Final Grade = Σ(Category Score × Category Weight) ÷ Total Weight</strong>
-                        </p>
-                        <p style={{ marginTop: "var(--space-3)" }}>
-                            For example: If Homework (20%) = 85% and Exams (80%) = 75%, your final grade is:
-                            (85×0.2) + (75×0.8) = 17 + 60 = 77%
-                        </p>
-                    </div>
-                </details>
-
-                {/* Deep SEO Content */}
+                {/* SEO Content */}
                 <section className="seo-content">
-                    <h2>How to Calculate Your Final Course Grade</h2>
+                    <h2>How to Calculate Your Final Grade</h2>
                     <p>
-                        Most courses use a weighted grading system where different assignments count for different percentages of your final grade.
-                        Understanding how this works is crucial for strategic studying — you should focus your effort where it matters most.
-                    </p>
-                    <p>
-                        Our Final Grade Calculator takes all your assignment categories (homework, quizzes, exams, projects, etc.)
-                        and calculates your current weighted average. It also shows you which categories have the most impact on your grade.
+                        Your final grade is a weighted average of all grade categories in your course.
+                        Each category (homework, quizzes, exams) contributes based on its weight.
                     </p>
 
-                    <h3>Worked Example: Calculating a Weighted Average</h3>
-                    <p>Let&apos;s calculate the final grade for a typical college course:</p>
+                    <h3>The Weighted Average Formula</h3>
+                    <p>
+                        <strong>Final Grade = (Score₁ × Weight₁ + Score₂ × Weight₂ + ...) ÷ Total Weight</strong>
+                    </p>
+
+                    <h3>Worked Example</h3>
+                    <p>A course with 4 grade categories:</p>
                     <div className="seo-content__table-wrapper">
                         <table className="seo-content__table">
                             <thead>
                                 <tr>
                                     <th>Category</th>
                                     <th>Weight</th>
-                                    <th>Your Score</th>
+                                    <th>Score</th>
                                     <th>Contribution</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>Homework</td>
-                                    <td>15%</td>
-                                    <td>92%</td>
-                                    <td>13.8</td>
-                                </tr>
-                                <tr>
-                                    <td>Quizzes</td>
-                                    <td>15%</td>
-                                    <td>85%</td>
-                                    <td>12.75</td>
-                                </tr>
-                                <tr>
-                                    <td>Midterm</td>
-                                    <td>25%</td>
-                                    <td>78%</td>
-                                    <td>19.5</td>
-                                </tr>
-                                <tr>
-                                    <td>Final Exam</td>
-                                    <td>30%</td>
-                                    <td>82%</td>
-                                    <td>24.6</td>
-                                </tr>
-                                <tr>
-                                    <td>Participation</td>
-                                    <td>15%</td>
-                                    <td>95%</td>
-                                    <td>14.25</td>
-                                </tr>
+                                <tr><td>Homework</td><td>20%</td><td>95%</td><td>19.0</td></tr>
+                                <tr><td>Quizzes</td><td>20%</td><td>88%</td><td>17.6</td></tr>
+                                <tr><td>Midterm</td><td>25%</td><td>82%</td><td>20.5</td></tr>
+                                <tr><td>Final Exam</td><td>35%</td><td>78%</td><td>27.3</td></tr>
                                 <tr className="seo-content__table-total">
                                     <td><strong>Total</strong></td>
                                     <td><strong>100%</strong></td>
                                     <td>—</td>
-                                    <td><strong>84.9%</strong></td>
+                                    <td><strong>84.4%</strong></td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                     <p>
-                        Your final grade is <strong>84.9%</strong>, which is a <strong>B</strong>.
-                        Notice that the Final Exam (30%) contributes almost twice as much as Homework (15%) to your grade.
+                        Final Grade = 84.4% = <strong>B</strong>
                     </p>
 
-                    <h3>Common Grading Weight Distributions</h3>
-                    <p>Here are typical weight distributions for different types of courses:</p>
+                    <h3>Why Some Categories Matter More</h3>
                     <div className="seo-content__scenarios">
                         <div className="seo-content__scenario">
-                            <h4>📚 Lecture-Based Course</h4>
-                            <p>
-                                Midterm: 25-30%<br />
-                                Final: 30-40%<br />
-                                Homework: 15-20%<br />
-                                Quizzes: 10-15%
-                            </p>
+                            <h4>📊 High-Weight Categories</h4>
+                            <p>A 35% final exam matters nearly twice as much as 20% homework. Focus your study time accordingly.</p>
                         </div>
                         <div className="seo-content__scenario">
-                            <h4>🔬 Lab-Based Course</h4>
-                            <p>
-                                Lab Reports: 30-40%<br />
-                                Midterm: 20-25%<br />
-                                Final: 25-30%<br />
-                                Participation: 10%
-                            </p>
+                            <h4>💡 Easy Points First</h4>
+                            <p>Homework and participation are often easy 100s. Don&apos;t throw away these free points.</p>
                         </div>
                         <div className="seo-content__scenario">
-                            <h4>📝 Writing-Intensive Course</h4>
-                            <p>
-                                Essays/Papers: 40-50%<br />
-                                Participation: 15-20%<br />
-                                Final Project: 20-30%<br />
-                                Short Assignments: 10%
-                            </p>
-                        </div>
-                        <div className="seo-content__scenario">
-                            <h4>💻 Project-Based Course</h4>
-                            <p>
-                                Final Project: 30-40%<br />
-                                Weekly Assignments: 30%<br />
-                                Midterm: 15-20%<br />
-                                Participation: 10%
-                            </p>
+                            <h4>⚠️ Exam Recovery</h4>
+                            <p>A bad midterm (25%) can be offset by a strong final (35%), but only if you improve significantly.</p>
                         </div>
                     </div>
 
-                    <h3>Strategic Studying: Where to Focus</h3>
-                    <p>
-                        Not all assignments are created equal. Use these principles to maximize your grade efficiency:
-                    </p>
-                    <ul style={{ marginLeft: "var(--space-6)", marginBottom: "var(--space-4)" }}>
-                        <li><strong>High-weight, low-score:</strong> These are your biggest opportunities. A 10-point improvement on a 30% exam adds 3 points to your final grade.</li>
-                        <li><strong>Easy points:</strong> Participation, homework completion, and attendance are often easy 100s. Don&apos;t throw these away.</li>
-                        <li><strong>Diminishing returns:</strong> Going from 95% to 100% on homework (5% weight) only adds 0.25 points. Focus elsewhere.</li>
-                    </ul>
-
-                    <h3>What If My Weights Don&apos;t Add to 100%?</h3>
-                    <p>
-                        If your syllabus weights don&apos;t add to 100%, check if some categories are &quot;optional&quot; or &quot;replace lowest grade.&quot;
-                        Our calculator will still work — it calculates your weighted average based on whatever weights you enter.
-                    </p>
-
-                    <h3>Next Steps</h3>
-                    <p>
-                        Now that you know your current grade, use our <a href="/grade-calculators/required-final-grade-calculator">Required Final Grade Calculator</a>
-                        to find out exactly what score you need on upcoming exams to reach your target.
-                        Or visit the <a href="/gpa">GPA Workspace</a> to see how this course affects your overall GPA.
-                    </p>
+                    <h3>Letter Grade Scale</h3>
+                    <div className="seo-content__table-wrapper">
+                        <table className="seo-content__table">
+                            <thead>
+                                <tr><th>Percentage</th><th>Letter</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>93-100%</td><td>A</td></tr>
+                                <tr><td>90-92%</td><td>A-</td></tr>
+                                <tr><td>87-89%</td><td>B+</td></tr>
+                                <tr><td>83-86%</td><td>B</td></tr>
+                                <tr><td>80-82%</td><td>B-</td></tr>
+                                <tr><td>77-79%</td><td>C+</td></tr>
+                                <tr><td>73-76%</td><td>C</td></tr>
+                                <tr><td>70-72%</td><td>C-</td></tr>
+                                <tr><td>60-69%</td><td>D</td></tr>
+                                <tr><td>Below 60%</td><td>F</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </section>
 
                 {/* Related Tools */}
-                <RelatedTools currentPath="/grade-calculators/final-grade-calculator" />
+                <section style={{ marginTop: "var(--space-8)" }}>
+                    <h3 style={{ marginBottom: "var(--space-4)" }}>Related Calculators</h3>
+                    <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "var(--space-4)" }}>
+                        <a href="/grade-calculators/required-final-grade-calculator" className="card card--hover" style={{ padding: "var(--space-4)", textDecoration: "none" }}>
+                            <strong style={{ color: "var(--color-text)" }}>Required Grade Calculator</strong>
+                            <p style={{ fontSize: "var(--text-sm)", color: "var(--color-text-muted)", marginTop: "var(--space-1)" }}>
+                                What do you need on your final?
+                            </p>
+                        </a>
+                        <a href="/course" className="card card--hover" style={{ padding: "var(--space-4)", textDecoration: "none" }}>
+                            <strong style={{ color: "var(--color-text)" }}>Course Analyzer</strong>
+                            <p style={{ fontSize: "var(--text-sm)", color: "var(--color-text-muted)", marginTop: "var(--space-1)" }}>
+                                Deep dive into your course grade
+                            </p>
+                        </a>
+                    </div>
+                </section>
             </div>
         </div>
     );
