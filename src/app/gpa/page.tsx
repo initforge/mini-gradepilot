@@ -55,7 +55,7 @@ const relatedLinks = [
         title: "Transcript Workspace",
         description: "Track your cumulative GPA over multiple semesters",
         href: "/transcript",
-        accent: "#14b8a6"
+        accent: "#8b5cf6"
     }
 ];
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 import styles from "./FancyButtons.module.css";
 
 interface SlideToggleButtonProps {
@@ -191,6 +191,60 @@ export function BubbleCTA({ href, children }: BubbleCTAProps) {
         <a href={href} className={styles.bubbleCta}>
             <span className={styles.bubbleCtaText}>{children}</span>
         </a>
+    );
+}
+
+// ─────────────────────────────────────────────────────────────
+// Fancy Dropdown (Custom Select with animations)
+// ─────────────────────────────────────────────────────────────
+interface FancyDropdownProps {
+    options: string[];
+    value: string;
+    onChange: (value: string) => void;
+}
+
+/**
+ * Custom dropdown with slide animation and hover effects
+ */
+export function FancyDropdown({ options, value, onChange }: FancyDropdownProps) {
+    const [isOpen, setIsOpen] = useState(false);
+
+    return (
+        <div className={styles.fancyDropdown}>
+            <button
+                type="button"
+                className={`${styles.fancyDropdownTrigger} ${isOpen ? styles.open : ""}`}
+                onClick={() => setIsOpen(!isOpen)}
+                onBlur={() => setTimeout(() => setIsOpen(false), 150)}
+            >
+                {value}
+                <svg
+                    className={styles.fancyDropdownArrow}
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                >
+                    <path d="M6 9l6 6 6-6" />
+                </svg>
+            </button>
+            <div className={`${styles.fancyDropdownMenu} ${isOpen ? styles.open : ""}`}>
+                {options.map((option) => (
+                    <div
+                        key={option}
+                        className={`${styles.fancyDropdownItem} ${value === option ? styles.selected : ""}`}
+                        onClick={() => {
+                            onChange(option);
+                            setIsOpen(false);
+                        }}
+                    >
+                        {option}
+                    </div>
+                ))}
+            </div>
+        </div>
     );
 }
 

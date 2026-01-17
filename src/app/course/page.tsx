@@ -6,7 +6,7 @@ import { IconScale, IconTarget, IconChartPie, IconIdea, IconLink, IconUnlock, Ic
 import { DeleteButton, AddButton } from "@/components/AnimatedButtons";
 import WorkspaceNav from "@/components/WorkspaceNav";
 import ProfileSwitcher from "@/components/ProfileSwitcher";
-import { OutlineButton } from "@/components/FancyButtons";
+import { OutlineButton, FancyDropdown } from "@/components/FancyButtons";
 import { FAQSection, generateFAQSchema, RelatedTools, ExplanationBlock, ExampleBlock } from "@/components/SEOContent";
 
 // Course Analyzer FAQ Data
@@ -48,7 +48,7 @@ const courseRelatedLinks = [
         title: "Transcript Workspace",
         description: "See how this semester affects cumulative GPA",
         href: "/transcript",
-        accent: "#0d9488"
+        accent: "#8b5cf6"
     }
 ];
 
@@ -470,23 +470,11 @@ export default function CourseAnalyzer() {
                                     <IconTarget style={{ width: "24px", height: "24px" }} />
                                     Target Grade
                                 </h3>
-                                <select
+                                <FancyDropdown
+                                    options={gradeOptions}
                                     value={targetGrade}
-                                    onChange={(e) => setTargetGrade(e.target.value)}
-                                    style={{
-                                        width: "100%",
-                                        padding: "var(--space-3)",
-                                        border: "2px solid var(--color-border)",
-                                        borderRadius: "var(--radius-md)",
-                                        fontSize: "var(--text-lg)",
-                                        fontWeight: 600,
-                                        marginBottom: "var(--space-4)",
-                                    }}
-                                >
-                                    {gradeOptions.map((g) => (
-                                        <option key={g} value={g}>{g}</option>
-                                    ))}
-                                </select>
+                                    onChange={setTargetGrade}
+                                />
 
                                 {remainingWeight > 0 ? (
                                     <div style={{

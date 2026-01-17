@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { IconChartPie, IconNote } from "@/components/Icons";
+import styles from "./FancyButtons.module.css";
 
 // FAQ Item with Schema-ready structure
 interface FAQItem {
@@ -14,52 +15,61 @@ interface FAQSectionProps {
     title?: string;
 }
 
+// Individual FAQ Item Component with animation
+function FAQItemComponent({ item }: { item: FAQItem }) {
+    const [isOpen, setIsOpen] = useState(false);
+
+    return (
+        <div
+            style={{
+                background: "white",
+                border: "1px solid var(--color-border)",
+                borderRadius: "var(--radius-md)",
+                overflow: "hidden",
+            }}
+        >
+            <button
+                onClick={() => setIsOpen(!isOpen)}
+                className={`${styles.faqToggle} ${isOpen ? styles.faqToggleOpen : ""}`}
+                style={{ borderRadius: isOpen ? "var(--radius-md) var(--radius-md) 0 0" : "var(--radius-md)" }}
+            >
+                <span className={styles.faqToggleText}>{item.question}</span>
+                <svg
+                    className={styles.faqToggleIcon}
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                >
+                    <path d="M12 5v14M5 12h14" />
+                </svg>
+            </button>
+            {isOpen && (
+                <div
+                    style={{
+                        padding: "var(--space-4)",
+                        color: "var(--color-text-muted)",
+                        lineHeight: 1.7,
+                        borderTop: "1px solid var(--color-border)",
+                        background: "#f8fafc",
+                    }}
+                >
+                    {item.answer}
+                </div>
+            )}
+        </div>
+    );
+}
+
 export function FAQSection({ items, title = "Frequently Asked Questions" }: FAQSectionProps) {
     return (
         <div style={{ marginTop: "var(--space-8)" }}>
             <h2 style={{ marginBottom: "var(--space-4)" }}>{title}</h2>
             <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-2)" }}>
                 {items.map((item, idx) => (
-                    <details
-                        key={idx}
-                        style={{
-                            background: "white",
-                            border: "1px solid var(--color-border)",
-                            borderRadius: "var(--radius-md)",
-                            overflow: "hidden",
-                        }}
-                    >
-                        <summary
-                            style={{
-                                padding: "var(--space-4)",
-                                cursor: "pointer",
-                                fontWeight: 600,
-                                display: "flex",
-                                justifyContent: "space-between",
-                                alignItems: "center",
-                                listStyle: "none",
-                            }}
-                        >
-                            {item.question}
-                            <span style={{
-                                fontSize: "var(--text-lg)",
-                                color: "var(--color-text-muted)",
-                                transition: "transform 0.2s",
-                            }}>
-                                +
-                            </span>
-                        </summary>
-                        <div
-                            style={{
-                                padding: "var(--space-4)",
-                                paddingTop: 0,
-                                color: "var(--color-text-muted)",
-                                lineHeight: 1.7,
-                            }}
-                        >
-                            {item.answer}
-                        </div>
-                    </details>
+                    <FAQItemComponent key={idx} item={item} />
                 ))}
             </div>
         </div>
@@ -99,36 +109,34 @@ export function RelatedTools({ links, title = "Related Workspaces" }: RelatedToo
     return (
         <div style={{ marginTop: "var(--space-8)" }}>
             <h3 style={{ marginBottom: "var(--space-3)" }}>{title}</h3>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: "var(--space-4)" }}>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "var(--space-4)" }}>
                 {links.map((link, idx) => (
                     <a
                         key={idx}
                         href={link.href}
+                        className={styles.relatedLinkBtn}
                         style={{
-                            display: "block",
-                            padding: "var(--space-4)",
-                            background: "white",
-                            border: "1px solid var(--color-border)",
-                            borderRadius: "var(--radius-md)",
-                            textDecoration: "none",
-                            color: "inherit",
-                            transition: "border-color 0.15s, box-shadow 0.15s",
+                            borderLeftColor: link.accent || "#14b8a6",
                         }}
                         onMouseOver={(e) => {
-                            e.currentTarget.style.borderColor = link.accent || "var(--color-primary)";
-                            e.currentTarget.style.boxShadow = `0 4px 12px ${link.accent || "var(--color-primary)"}20`;
+                            e.currentTarget.style.borderColor = link.accent || "#14b8a6";
                         }}
                         onMouseOut={(e) => {
-                            e.currentTarget.style.borderColor = "var(--color-border)";
-                            e.currentTarget.style.boxShadow = "none";
+                            e.currentTarget.style.borderColor = "#e2e8f0";
+                            e.currentTarget.style.borderLeftColor = link.accent || "#14b8a6";
                         }}
                     >
-                        <div style={{ fontWeight: 600, marginBottom: "var(--space-1)", color: link.accent || "var(--color-primary)" }}>
-                            {link.title} →
-                        </div>
-                        <div style={{ fontSize: "var(--text-sm)", color: "var(--color-text-muted)" }}>
-                            {link.description}
-                        </div>
+                        <span className={styles.relatedLinkBtnInner}>
+                            <span
+                                className={styles.relatedLinkBtnTitle}
+                                style={{ "--hover-color": link.accent || "#14b8a6" } as React.CSSProperties}
+                            >
+                                {link.title} →
+                            </span>
+                            <span className={styles.relatedLinkBtnDesc}>
+                                {link.description}
+                            </span>
+                        </span>
                     </a>
                 ))}
             </div>
@@ -145,9 +153,10 @@ interface ExplanationBlockProps {
 }
 
 export function ExplanationBlock({ title, children, defaultOpen = true, icon }: ExplanationBlockProps) {
+    const [isOpen, setIsOpen] = useState(defaultOpen);
+
     return (
-        <details
-            open={defaultOpen}
+        <div
             style={{
                 background: "white",
                 border: "1px solid var(--color-border)",
@@ -156,32 +165,40 @@ export function ExplanationBlock({ title, children, defaultOpen = true, icon }: 
                 overflow: "hidden",
             }}
         >
-            <summary
+            <button
+                onClick={() => setIsOpen(!isOpen)}
+                className={`${styles.faqToggle} ${isOpen ? styles.faqToggleOpen : ""}`}
                 style={{
-                    padding: "var(--space-4)",
-                    cursor: "pointer",
-                    fontWeight: 700,
+                    padding: "var(--space-4) 3em var(--space-4) var(--space-4)",
                     fontSize: "var(--text-lg)",
+                    fontWeight: 700,
                     background: "#f8fafc",
-                    borderBottom: "1px solid var(--color-border)",
-                    listStyle: "none",
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
+                    borderBottom: isOpen ? "1px solid var(--color-border)" : "none",
+                    borderRadius: isOpen ? "var(--radius-lg) var(--radius-lg) 0 0" : "var(--radius-lg)",
                 }}
             >
-                <div style={{ display: "flex", alignItems: "center", gap: "var(--space-2)" }}>
+                <span style={{ display: "flex", alignItems: "center", gap: "var(--space-2)" }}>
                     {icon || <IconNote style={{ width: "24px", height: "24px", color: "var(--color-primary)" }} />}
-                    {title}
-                </div>
-                <span style={{ fontSize: "var(--text-sm)", color: "var(--color-text-muted)" }}>
-                    Click to expand/collapse
+                    <span className={styles.faqToggleText}>{title}</span>
                 </span>
-            </summary>
-            <div style={{ padding: "var(--space-6)", lineHeight: 1.8 }}>
-                {children}
-            </div>
-        </details>
+                <svg
+                    className={styles.faqToggleIcon}
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                >
+                    <path d="M9 18l6-6-6-6" />
+                </svg>
+            </button>
+            {isOpen && (
+                <div style={{ padding: "var(--space-6)", lineHeight: 1.8 }}>
+                    {children}
+                </div>
+            )}
+        </div>
     );
 }
 
