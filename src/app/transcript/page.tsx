@@ -10,7 +10,7 @@ import {
 import { IconBookOpen, IconTrendUp, IconTrendDown, IconTrendFlat, IconIdea, IconBalance, IconNote, IconEmpty } from "@/components/Icons";
 import WorkspaceNav from "@/components/WorkspaceNav";
 import ProfileSwitcher from "@/components/ProfileSwitcher";
-import { SlideToggleButton, TabToggle } from "@/components/FancyButtons";
+import { SlideToggleButton, TabToggle, BubbleCTA } from "@/components/FancyButtons";
 import { FAQSection, generateFAQSchema, RelatedTools, ExplanationBlock, ExampleBlock } from "@/components/SEOContent";
 
 // Transcript FAQ Data
@@ -170,20 +170,9 @@ export default function TranscriptWorkspace() {
                                 Your transcript is automatically generated from the GPA Workspace.
                                 Add semesters and courses there to see your transcript.
                             </p>
-                            <a
-                                href="/gpa"
-                                style={{
-                                    display: "inline-block",
-                                    background: "var(--color-primary)",
-                                    color: "white",
-                                    padding: "var(--space-3) var(--space-6)",
-                                    borderRadius: "var(--radius-md)",
-                                    fontWeight: 600,
-                                    textDecoration: "none",
-                                }}
-                            >
+                            <BubbleCTA href="/gpa">
                                 → Go to GPA Workspace
-                            </a>
+                            </BubbleCTA>
                         </div>
                     ) : (
                         <>

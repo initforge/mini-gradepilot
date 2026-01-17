@@ -166,7 +166,7 @@ export default function CourseAnalyzer() {
                         <div style={{ display: "flex", alignItems: "center", gap: "var(--space-3)" }}>
                             <IconScale className="w-8 h-8" />
                             <div>
-                                <h1 style={{ fontSize: "var(--text-xl)", fontWeight: 700, margin: 0 }}>Course Grade Analyzer</h1>
+                                <h1 style={{ fontSize: "var(--text-xl)", fontWeight: 700, margin: 0, color: "white" }}>Course Grade Analyzer</h1>
                                 <p style={{ fontSize: "var(--text-sm)", opacity: 0.8, margin: 0 }}>
                                     {tempMode ? "Temporary Mode" : "Linked to GPA Workspace"} • Break down, project, succeed
                                 </p>

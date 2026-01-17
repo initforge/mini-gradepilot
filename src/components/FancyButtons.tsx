@@ -176,3 +176,21 @@ export function SwitchToggle({ checked, onChange, label }: SwitchToggleProps) {
         </label>
     );
 }
+
+interface BubbleCTAProps {
+    href: string;
+    children: ReactNode;
+}
+
+/**
+ * Bubble CTA button with expanding circles effect (Randdose style)
+ * Used for: "Go to GPA Workspace" links
+ */
+export function BubbleCTA({ href, children }: BubbleCTAProps) {
+    return (
+        <a href={href} className={styles.bubbleCta}>
+            <span className={styles.bubbleCtaText}>{children}</span>
+        </a>
+    );
+}
+

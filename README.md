@@ -1,10 +1,10 @@
 # GradePilot
 
-**Academic Decision Workspace for US Students** — Calculate GPA, analyze grades, and make data-driven academic decisions.
+**Free GPA Calculator & Grade Planning Tools for US Students** — Calculate GPA, analyze grades, and hit your academic targets.
 
 *Built for US high school & college students dealing with GPA pressure.*
 
-🌐 **Live**: https://gradepilot.org
+🌐 **Live**: [gradepilot.org](https://gradepilot.org)
 
 ---
 
@@ -15,7 +15,7 @@ npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) to view the app.
+Open [http://localhost:3000](http://localhost:3000)
 
 ---
 
@@ -25,111 +25,55 @@ Open [http://localhost:3000](http://localhost:3000) to view the app.
 |-------|------------|
 | Framework | Next.js 15 (App Router) |
 | Language | TypeScript |
-| State | Zustand (localStorage persisted) |
-| Styling | CSS Variables + Custom Design System |
-| Icons | Custom branded SVG system |
-| Deployment | Docker + Nginx (VPS) |
+| State | Zustand (localStorage) |
+| Styling | CSS Variables |
+| Deployment | Docker + Nginx |
 
 ---
 
-## 🎯 Core Workspaces
+## 🎯 Features
 
-| Workspace | Route | Description |
-|-----------|-------|-------------|
-| **GPA Workspace** | `/gpa` | Semester management, Aim Mode targeting, weighted/unweighted toggle |
-| **Course Analyzer** | `/course` | Weight breakdown, "What score do I need?" calculator |
-| **Transcript** | `/transcript` | Cumulative GPA tracking, trend visualization |
+### Workspaces
+| Route | Description |
+|-------|-------------|
+| `/gpa` | Semester GPA management, Aim Mode targeting |
+| `/course` | Course weight breakdown, "What score do I need?" |
+| `/transcript` | Cumulative GPA tracking, trend visualization |
 
----
-
-## 🔧 Standalone Calculators
-
-| Calculator | Route |
-|------------|-------|
-| GPA Calculator | `/gpa-calculators/gpa-calculator` |
-| Weighted GPA Calculator | `/gpa-calculators/weighted-gpa-calculator` |
-| College GPA Calculator | `/gpa-calculators/college-gpa-calculator` |
-| High School GPA Calculator | `/gpa-calculators/high-school-gpa-calculator` |
-| Final Grade Calculator | `/grade-calculators/final-grade-calculator` |
-| Required Final Grade Calculator | `/grade-calculators/required-final-grade-calculator` |
+### Calculators
+| Route | Target Keyword |
+|-------|---------------|
+| `/gpa-calculators/gpa-calculator` | GPA calculator |
+| `/gpa-calculators/weighted-gpa-calculator` | Weighted GPA calculator |
+| `/gpa-calculators/college-gpa-calculator` | College GPA calculator |
+| `/gpa-calculators/high-school-gpa-calculator` | High school GPA calculator |
+| `/grade-calculators/final-grade-calculator` | Final grade calculator |
+| `/grade-calculators/required-final-grade-calculator` | What grade do I need? |
 
 ---
 
-## 🌐 Production Deployment
-
-### Docker (Recommended)
-```bash
-# Build and start
-docker compose up -d --build
-
-# View logs
-docker logs gradepilot -f
-```
-
-### VPS Update
-```bash
-cd ~/mini-gradepilot
-git pull
-docker compose up -d --build
-```
-
-### First-time Deploy
-```bash
-cd ~ && git clone https://github.com/initforge/mini-gradepilot.git
-cd mini-gradepilot && docker compose up -d --build
-```
-
-### SSL Renewal
-```bash
-certbot renew --dry-run
-```
-
----
-
-##  Project Structure
+## 📁 Project Structure
 
 ```
 src/
 ├── app/
-│   ├── page.tsx           # Homepage
 │   ├── gpa/               # GPA Workspace
 │   ├── course/            # Course Analyzer
 │   ├── transcript/        # Transcript
-│   ├── gpa-calculators/   # 4 standalone GPA calculators
-│   ├── grade-calculators/ # 2 standalone grade calculators
-│   ├── about/
-│   ├── contact/
-│   ├── privacy/
-│   ├── terms/
+│   ├── gpa-calculators/   # 4 GPA calculators
+│   ├── grade-calculators/ # 2 grade calculators
 │   ├── sitemap.ts         # Dynamic sitemap
 │   └── robots.ts          # Crawler rules
 ├── components/
-│   ├── Icons.tsx          # Branded SVG icons
-│   └── RelatedTools.tsx   # Cross-linking component
+│   ├── Icons.tsx          # SVG icons
+│   └── RelatedTools.tsx   # Internal linking
 └── lib/
     └── useAcademicStore.ts
 
-public/
-└── sitemap.xml            # Static sitemap backup
-
-nginx/
-└── nginx.conf             # Production config
-
-TRAFFIC_PLAN.md            # Traffic acquisition strategy
-SEO_CHECKLIST.md           # SEO & deployment status
+docs/
+├── ARCHITECTURE.md        # System design
+└── SEO_TECHNICAL.md       # Technical SEO status
 ```
-
----
-
-## 📊 Page Count
-
-| Type | Count |
-|------|-------|
-| Workspaces | 3 |
-| GPA Calculators | 4 |
-| Grade Calculators | 2 |
-| Info Pages | 4 |
-| **Total** | **13 pages** |
 
 ---
 
@@ -137,11 +81,20 @@ SEO_CHECKLIST.md           # SEO & deployment status
 
 | Command | Description |
 |---------|-------------|
-| `npm run dev` | Start dev server |
+| `npm run dev` | Dev server |
 | `npm run build` | Production build |
-| `npm run start` | Start production server |
-| `npm run lint` | Run ESLint |
+| `npm run lint` | ESLint |
 
 ---
 
-*Last updated: January 16, 2026*
+## 🌐 Deployment
+
+```bash
+docker compose up -d --build
+```
+
+See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for full deployment guide.
+
+---
+
+*13 pages • Next.js 15 • TypeScript • Zero backend*
