@@ -10,8 +10,19 @@ A grade management and analytics dashboard built with Next.js. Upload student sc
 
 - **Score Management** — import grades from Excel (xlsx) or manual entry
 - **Analytics Dashboard** — distribution charts, trends, comparisons with Recharts
-- **State Management** — Zustand for client-side data persistence
 - **Docker deployment** — production-ready with Nginx reverse proxy
+
+## Getting started
+
+```bash
+git clone https://github.com/initforge/mini-gradepilot.git
+cd mini-gradepilot
+npm install
+npm run dev
+
+# Docker
+docker-compose up -d
+```
 
 ---
 
