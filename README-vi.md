@@ -1,23 +1,19 @@
 🇬🇧 [Read in English](README.md)
 
-# Mini GradePilot
+# Mini GradePilot — Dashboard Phân tích Điểm
 
-Công cụ chấm điểm và đánh giá bằng AI
+![Next.js](https://img.shields.io/badge/Next.js-000?style=flat-square&logo=nextdotjs&logoColor=white) ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white) ![Recharts](https://img.shields.io/badge/Recharts-22B5BF?style=flat-square) ![Zustand](https://img.shields.io/badge/Zustand-433E38?style=flat-square) ![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white) ![Nginx](https://img.shields.io/badge/Nginx-009639?style=flat-square&logo=nginx&logoColor=white)
 
-## Công nghệ
+Dashboard quản lý và phân tích điểm bằng Next.js. Upload điểm, trực quan hóa phân bố, theo dõi xu hướng.
 
-![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white) ![Gemini API](https://img.shields.io/badge/Gemini%20API-8E75B2?style=flat-square)
+## Tính năng chính
 
-## Tính năng
-
-- Hệ thống chấm điểm tự động
-- Đánh giá bài luận bằng AI
-- Dashboard phân tích điểm
-- Hỗ trợ đa định dạng
+- **Quản lý điểm** — import từ Excel (xlsx) hoặc nhập tay
+- **Dashboard phân tích** — biểu đồ phân bố, xu hướng, so sánh bằng Recharts
+- **State Management** — Zustand cho dữ liệu client-side
+- **Docker deployment** — production-ready với Nginx reverse proxy
 
 ---
-
-## Tác giả
 
 **Xuan Linh** — Fullstack Developer
 
