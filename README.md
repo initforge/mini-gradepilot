@@ -1,23 +1,19 @@
 🇻🇳 [Đọc bằng tiếng Việt](README-vi.md)
 
-# Mini GradePilot
+# Mini GradePilot — Grade Analytics Dashboard
 
-AI-powered grading and assessment tool
+![Next.js](https://img.shields.io/badge/Next.js-000?style=flat-square&logo=nextdotjs&logoColor=white) ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white) ![Recharts](https://img.shields.io/badge/Recharts-22B5BF?style=flat-square) ![Zustand](https://img.shields.io/badge/Zustand-433E38?style=flat-square) ![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white) ![Nginx](https://img.shields.io/badge/Nginx-009639?style=flat-square&logo=nginx&logoColor=white)
 
-## Tech Stack
+A grade management and analytics dashboard built with Next.js. Upload student scores, visualize distributions, and track performance trends.
 
-![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white) ![Gemini API](https://img.shields.io/badge/Gemini%20API-8E75B2?style=flat-square)
+## What it does
 
-## Features
-
-- Automated grading system
-- AI essay evaluation
-- Score analytics dashboard
-- Multi-format support
+- **Score Management** — import grades from Excel (xlsx) or manual entry
+- **Analytics Dashboard** — distribution charts, trends, comparisons with Recharts
+- **State Management** — Zustand for client-side data persistence
+- **Docker deployment** — production-ready with Nginx reverse proxy
 
 ---
-
-## Author
 
 **Xuan Linh** — Fullstack Developer
 
